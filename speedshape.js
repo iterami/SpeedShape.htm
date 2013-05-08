@@ -1,4 +1,4 @@
-function centisecond(){
+function decisecond(){
     time=(time-.1).toFixed(1);
     if(time<=0){
         clearInterval(interval)
@@ -117,7 +117,7 @@ function v(i,k){
             randomize_shapes()
         }
 
-        interval=setInterval('centisecond()',100)
+        interval=setInterval('decisecond()',100)
     }else{
         buffer=0;
         canvas=0;
