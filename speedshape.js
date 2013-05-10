@@ -32,6 +32,12 @@ function draw(){
 function get(i){
     return document.getElementById(i)
 }
+function play_audio(i){
+    if(settings[0]>0){/*Audio Volume*/
+        get(i).currentTime=0;
+        get(i).play()
+    }
+}
 function randomize_shapes(){
     if(settings[1]>0){/*Number of Reds*/
         reds=[];
@@ -49,12 +55,6 @@ function randomize_shapes(){
 }
 function random_number(i){
     return Math.floor(Math.random()*i)
-}
-function p(i){
-    if(settings[0]>0){/*Audio Volume*/
-        get(i).currentTime=0;
-        get(i).play()
-    }
 }
 function resize(){
     if(mode>0){
@@ -97,18 +97,18 @@ function save(){
         ls.setItem('speedshape4',0)
     }
 }
-function v(i,k){
+function setmode(newmode,frommenu){
     clearInterval(interval);
-    mode=i;
-    if(i>0){
-        if(k){
+    mode=newmode;
+    if(mode>0){
+        if(frommenu){
             save()
         }
 
         score=0;
         time=settings[2];
 
-        if(k){
+        if(frommenu){
             get('page').innerHTML='<canvas id=canvas oncontextmenu="return false"></canvas>';
             buffer=get('buffer').getContext('2d');
             canvas=get('canvas').getContext('2d');
@@ -122,7 +122,7 @@ function v(i,k){
         buffer=0;
         canvas=0;
 
-        get('page').innerHTML='<div style="border-right:8px solid #222;display:inline-block;text-align:left;vertical-align:top"><div class=c><b>Speedshape</b></div><hr><div class=c><a onclick=v(1,1)>Start New Game</a></div><hr><div class=c><input id=reds size=1 type=text value='+settings[1]+'>Red<br><input id=time-limit size=1 type=text value='+settings[2]+'>Time Limit</div></div><div style=display:inline-block;text-align:left><div class=c><input disabled size=3 style=border:0 type=text value=ESC>Main Menu<br><input id=restart-key maxlength=1 size=3 type=text value='+settings[3]+'>Restart</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='+settings[0]+'>Audio<br><label><input '+(settings[4]?'checked ':'')+'id=clear type=checkbox>Clear</label><br><a onclick="if(confirm(\'Reset settings?\')){get(\'clear\').checked=get(\'audio-volume\').value=1;get(\'restart-key\').value=\'H\';get(\'reds\').value=10;get(\'time-limit\').value=30;save();v(0,1)}">Reset Settings</a></div></div>'
+        get('page').innerHTML='<div style="border-right:8px solid #222;display:inline-block;text-align:left;vertical-align:top"><div class=c><b>Speedshape</b></div><hr><div class=c><a onclick=setmode(1,1)>Start New Game</a></div><hr><div class=c><input id=reds size=1 type=text value='+settings[1]+'>Red<br><input id=time-limit size=1 type=text value='+settings[2]+'>Time Limit</div></div><div style=display:inline-block;text-align:left><div class=c><input disabled size=3 style=border:0 type=text value=ESC>Main Menu<br><input id=restart-key maxlength=1 size=3 type=text value='+settings[3]+'>Restart</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='+settings[0]+'>Audio<br><label><input '+(settings[4]?'checked ':'')+'id=clear type=checkbox>Clear</label><br><a onclick="if(confirm(\'Reset settings?\')){get(\'clear\').checked=get(\'audio-volume\').value=1;get(\'restart-key\').value=\'H\';get(\'reds\').value=10;get(\'time-limit\').value=30;save();setmode(0,1)}">Reset Settings</a></div></div>'
     }
 }
 var buffer=canvas=height=i=interval=j=mode=mouse_x=mouse_y=score=time=width=0,
@@ -136,16 +136,16 @@ settings=[
 ],
 reds=white=[];
 
-v(0,0);
+setmode(0,0);
 
 window.onkeydown=function(e){
     if(mode>0){
         i=window.event?event:e;
         i=i.charCode?i.charCode:i.keyCode;
         if(String.fromCharCode(i)===settings[3]){/*Reset Key?*/
-            v(1,0)
+            setmode(1,0)
         }else if(i==27){/*ESC*/
-            v(0,0)
+            setmode(0,0)
         }
     }
 };
