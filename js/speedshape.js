@@ -41,14 +41,14 @@ function draw(){
 
     buffer.font = '23pt sans-serif';
     buffer.fillText(
-        'Score: ' + score,
+        'Time: ' + time + '/' + settings[2],
         5,
         25
     );
     buffer.fillText(
-        'Time: ' + time + '/' + settings[2],
+        'Score: ' + score,
         5,
-        50
+        55
     );
 
     if(settings[4]){/* Clear? */
