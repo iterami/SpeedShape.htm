@@ -27,7 +27,7 @@ function draw(){
                 reds[i][1] - reds[i][3] / 2,
                 reds[i][2],
                 reds[i][3]
-            )
+            );
         }while(i--);
     }
 
@@ -109,8 +109,13 @@ function random_number(i){
 
 function resize(){
     if(mode > 0){
-        height = get('buffer').height = get('canvas').height = window.innerHeight;
-        width = get('buffer').width = get('canvas').width = window.innerWidth;
+        width = window.innerWidth;
+        get('buffer').width = width;
+        get('canvas').width = width;
+
+        height = window.innerHeight;
+        get('buffer').height = height;
+        get('canvas').height = height;
 
         if(time > 0){
             randomize_shapes();
@@ -223,9 +228,9 @@ var mouse_y = 0;
 var reds = [];
 var score = 0;
 var settings = [
-    ls.getItem('speedshape-0') === null ? 1 : parseFloat(ls.getItem('speedshape-0')),/* Audio Volume */
-    ls.getItem('speedshape-1') === null ? 10 : parseInt(ls.getItem('speedshape-1')),/* Number of Reds */
-    ls.getItem('speedshape-2') === null ? 30 : parseInt(ls.getItem('speedshape-2')),/* Time Limit */
+    ls.getItem('speedshape-0') === null ?   1 : parseFloat(ls.getItem('speedshape-0')),/* Audio Volume */
+    ls.getItem('speedshape-1') === null ?  10 : parseInt(ls.getItem('speedshape-1')),/* Number of Reds */
+    ls.getItem('speedshape-2') === null ?  30 : parseInt(ls.getItem('speedshape-2')),/* Time Limit */
     ls.getItem('speedshape-3') === null ? 'H' : ls.getItem('speedshape-3'),/* Reset Key */
     ls.getItem('speedshape-4') === null/* Clear? */
 ];
