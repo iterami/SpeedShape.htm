@@ -23,8 +23,8 @@ function draw(){
         buffer.fillStyle = '#f00';
         do{
             buffer.fillRect(
-                reds[i][0] - reds[i][2] / 2,
-                reds[i][1] - reds[i][3] / 2,
+                reds[i][0],
+                reds[i][1],
                 reds[i][2],
                 reds[i][3]
             );
@@ -33,8 +33,8 @@ function draw(){
 
     buffer.fillStyle = '#fff';
     buffer.fillRect(
-        white[0] - white[2] / 2,
-        white[1] - white[3] / 2,
+        white[0],
+        white[1],
         white[2],
         white[3]
     );
@@ -83,8 +83,8 @@ function randomize_shapes(){
         i = settings[1] - 1;
         do{
             reds.push([
-                random_number(width),
-                random_number(height),
+                random_number(width) - 21,
+                random_number(height) - 21,
                 random_number(200) + 42,
                 random_number(200) + 42
             ]);
@@ -92,8 +92,8 @@ function randomize_shapes(){
     }
 
     white = [
-        random_number(width),
-        random_number(height),
+        random_number(width) - 9,
+        random_number(height) - 9,
         random_number(99) + 20,
         random_number(99) + 20
     ];
@@ -261,10 +261,10 @@ window.onmousedown = function(e){
         mouse_x = e.pageX;
         mouse_y = e.pageY;
 
-        if(mouse_x > white[0] - white[2] / 2
-         && mouse_x < white[0] + white[2] / 2
-         && mouse_y > white[1] - white[3] / 2
-         && mouse_y < white[1] + white[3] / 2){
+        if(mouse_x > white[0]
+         && mouse_x < white[0] + white[2]
+         && mouse_y > white[1]
+         && mouse_y < white[1] + white[3]){
             score += 1;
             randomize_shapes();
 
@@ -272,10 +272,10 @@ window.onmousedown = function(e){
             i = reds.length-1;
             if(i >= 0){
                 do{
-                    if(mouse_x > reds[i][0] - reds[i][2] / 2
-                     && mouse_x < reds[i][0] + reds[i][2] / 2
-                     && mouse_y > reds[i][1] - reds[i][3] / 2
-                     && mouse_y < reds[i][1] + reds[i][3] / 2){
+                    if(mouse_x > reds[i][0]
+                     && mouse_x < reds[i][0] + reds[i][2]
+                     && mouse_y > reds[i][1]
+                     && mouse_y < reds[i][1] + reds[i][3]){
                         score -= 1;
                         randomize_shapes();
                         break;
