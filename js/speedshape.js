@@ -79,7 +79,7 @@ function play_audio(i){
 
 function randomize_shapes(){
     if(settings[1] > 0){// Number of Reds
-        reds = [];
+        reds.length = 0;
         i = settings[1] - 1;
         do{
             reds.push([
