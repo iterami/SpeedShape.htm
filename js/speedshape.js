@@ -206,9 +206,9 @@ function setmode(newmode, newgame){
         buffer = 0;
         canvas = 0;
 
-        get('page').innerHTML = '<div style="border-right:8px solid #222;display:inline-block;text-align:left;vertical-align:top"><div class=c><b>Speedshape</b></div><hr><div class=c><ul><li><a onclick="setmode(1, 1)">Start New Game</a></ul></div><hr><div class=c><input id=reds size=2 value='
-            + settings[1] + '>Red<br><input id=time-limit size=2 value='
-            + settings[2] + '>Time Limit</div></div><div style=display:inline-block;text-align:left><div class=c><input disabled size=3 style=border:0 value=ESC>Main Menu<br><input id=restart-key maxlength=1 size=3 value='
+        get('page').innerHTML = '<div style="border-right:8px solid #222;display:inline-block;text-align:left;vertical-align:top"><div class=c><b>Speedshape</b></div><hr><div class=c><ul><li><a onclick="setmode(1, 1)">Start New Game</a></ul></div><hr><div class=c><input id=reds value='
+            + settings[1] + '>Red<br><input id=time-limit value='
+            + settings[2] + '>Time Limit</div></div><div style=display:inline-block;text-align:left><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
             + settings[3] + '>Restart</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
             + settings[0] + '>Audio<br><label><input '
             + (settings[4] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><a onclick="if(confirm(\'Reset settings?\')){get(\'clear\').checked=get(\'audio-volume\').value=1;get(\'restart-key\').value=\'H\';get(\'reds\').value=10;get(\'time-limit\').value=30;save();setmode(0,1)}">Reset Settings</a></div></div>';
