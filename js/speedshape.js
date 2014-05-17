@@ -18,17 +18,17 @@ function draw(){
         );
     }
 
-    i = reds.length - 1;
-    if(i >= 0){
+    var loop_counter = reds.length - 1;
+    if(loop_counter >= 0){
         buffer.fillStyle = '#f00';
         do{
             buffer.fillRect(
-              reds[i][0],
-              reds[i][1],
-              reds[i][2],
-              reds[i][3]
+              reds[loop_counter][0],
+              reds[loop_counter][1],
+              reds[loop_counter][2],
+              reds[loop_counter][3]
             );
-        }while(i--);
+        }while(loop_counter--);
     }
 
     buffer.fillStyle = '#fff';
@@ -66,17 +66,17 @@ function draw(){
     );
 }
 
-function play_audio(i){
+function play_audio(id){
     if(settings[0] > 0){// Audio Volume
-        document.getElementById(i).currentTime = 0;
-        document.getElementById(i).play();
+        document.getElementById(id).currentTime = 0;
+        document.getElementById(id).play();
     }
 }
 
 function randomize_shapes(){
     if(settings[1] > 0){// Number of Reds
         reds.length = 0;
-        i = settings[1] - 1;
+        var loop_counter = settings[1] - 1;
         do{
             reds.push([
               random_number(width) - 21,
@@ -84,7 +84,7 @@ function randomize_shapes(){
               random_number(200) + 42,
               random_number(200) + 42
             ]);
-        }while(i--);
+        }while(loop_counter--);
     }
 
     white = [
@@ -116,13 +116,13 @@ function reset(){
 
 function resize(){
     if(mode > 0){
-        width = window.innerWidth;
-        document.getElementById('buffer').width = width;
-        document.getElementById('canvas').width = width;
-
         height = window.innerHeight;
         document.getElementById('buffer').height = height;
         document.getElementById('canvas').height = height;
+
+        width = window.innerWidth;
+        document.getElementById('buffer').width = width;
+        document.getElementById('canvas').width = width;
 
         if(time > 0){
             randomize_shapes();
@@ -208,7 +208,10 @@ function setmode(newmode, newgame){
             randomize_shapes();
         }
 
-        interval = setInterval('decisecond()', 100);
+        interval = setInterval(
+          'decisecond()',
+          100
+        );
 
     // main menu mode
     }else{
@@ -227,7 +230,6 @@ function setmode(newmode, newgame){
 var buffer = 0;
 var canvas = 0;
 var height = 0;
-var i = 0;
 var interval = 0;
 var j = 0;
 var mode = 0;
@@ -246,8 +248,7 @@ var settings = [
     ? 30
     : parseInt(window.localStorage.getItem('speedshape-2')),// Time Limit
   window.localStorage.getItem('speedshape-3') === null
-    ?
-    'H'
+    ? 'H'
     : window.localStorage.getItem('speedshape-3'),// Reset Key
   window.localStorage.getItem('speedshape-4') === null// Clear?
 ];
@@ -259,20 +260,21 @@ setmode(0,0);
 
 window.onkeydown = function(e){
     if(mode>0){
-        i = window.event ? event : e;
-        i = i.charCode ? i.charCode : i.keyCode;
+        var key = window.event ? event : e;
+        key = key.charCode ? key.charCode : key.keyCode;
 
-        if(String.fromCharCode(i) === settings[3]){// Reset Key?
+        if(String.fromCharCode(key) === settings[3]){// Reset Key?
             setmode(1, 0);
 
-        }else if(i === 27){// ESC
+        }else if(key === 27){// ESC
             setmode(0, 0);
         }
     }
 };
 
 window.onmousedown = function(e){
-    if(mode > 0 && time > 0){
+    if(mode > 0
+      && time > 0){
         e.preventDefault();
 
         mouse_x = e.pageX;
@@ -286,18 +288,18 @@ window.onmousedown = function(e){
             randomize_shapes();
 
         }else{
-            i = reds.length-1;
-            if(i >= 0){
+            var loop_counter = reds.length-1;
+            if(loop_counter >= 0){
                 do{
-                    if(mouse_x > reds[i][0]
-                      && mouse_x < reds[i][0] + reds[i][2]
-                      && mouse_y > reds[i][1]
-                      && mouse_y < reds[i][1] + reds[i][3]){
+                    if(mouse_x > reds[loop_counter][0]
+                      && mouse_x < reds[loop_counter][0] + reds[loop_counter][2]
+                      && mouse_y > reds[loop_counter][1]
+                      && mouse_y < reds[loop_counter][1] + reds[loop_counter][3]){
                         score -= 1;
                         randomize_shapes();
                         break;
                     }
-                }while(i--);
+                }while(loop_counter--);
             }
         }
     }
