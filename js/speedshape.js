@@ -189,6 +189,8 @@ function setmode(newmode, newgame){
     clearInterval(interval);
     mode = newmode;
 
+    reds.length = 0;
+
     // new game mode
     if(mode > 0){
         if(newgame){
