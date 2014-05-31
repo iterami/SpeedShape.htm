@@ -146,32 +146,32 @@ function save(){
         );
     }
 
-    i = 2;
+    var loop_counter = 2;
     do{
         j = [
           'audio-volume',
           'reds',
           'time-limit'
-        ][i];
+        ][loop_counter];
         if(isNaN(document.getElementById(j).value)
-          || document.getElementById(j).value === [1, 10, 30][i]
-          || document.getElementById(j).value < [0, 0, 1][i]){
-            window.localStorage.removeItem('speedshape-' + i);
-            settings[i] = [
+          || document.getElementById(j).value === [1, 10, 30][loop_counter]
+          || document.getElementById(j).value < [0, 0, 1][loop_counter]){
+            window.localStorage.removeItem('speedshape-' + loop_counter);
+            settings[loop_counter] = [
               1,
               10,
               30
-            ][i];
-            document.getElementById(j).value = settings[i];
+            ][loop_counter];
+            document.getElementById(j).value = settings[loop_counter];
 
         }else{
-            settings[i] = parseFloat(document.getElementById(j).value);
+            settings[loop_counter] = parseFloat(document.getElementById(j).value);
             window.localStorage.setItem(
-              'speedshape-' + i,
-              settings[i]
+              'speedshape-' + loop_counter,
+              settings[loop_counter]
             );
         }
-    }while(i--);
+    }while(loop_counter--);
 
     settings[4] = document.getElementById('clear').checked;// Clear?
     if(settings[4]){
