@@ -220,7 +220,7 @@ function setmode(newmode, newgame){
         buffer = 0;
         canvas = 0;
 
-        document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>Speedshape</b></div><hr><div class=c><ul><li><a onclick="setmode(1, 1)">Start New Game</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
+        document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>Speedshape.htm</b></div><hr><div class=c><ul><li><a onclick="setmode(1, 1)">Start New Game</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
           + settings[3] + '>Restart</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
           + settings[0] + '>Audio<br><label><input '
           + (settings[4] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=reds value='
