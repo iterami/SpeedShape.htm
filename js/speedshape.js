@@ -79,28 +79,24 @@ function randomize_shapes(){
         var loop_counter = settings[1] - 1;
         do{
             reds.push([
-              random_number(width) - 21,
-              random_number(height) - 21,
-              random_number(200) + 42,
-              random_number(200) + 42
+              Math.floor(Math.random() * width) - 21,
+              Math.floor(Math.random() * height) - 21,
+              Math.floor(Math.random() * 200) + 42,
+              Math.floor(Math.random() * 200) + 42
             ]);
         }while(loop_counter--);
     }
 
     white = [
-      random_number(width) - 9,
-      random_number(height) - 9,
-      random_number(99) + 20,
-      random_number(99) + 20
+      Math.floor(Math.random() * width) - 9,
+      Math.floor(Math.random() * height) - 9,
+      Math.floor(Math.random() * 99) + 20,
+      Math.floor(Math.random() * 99) + 20
     ];
 
     if(time <= 0){
         draw();
     }
-}
-
-function random_number(i){
-    return Math.floor(Math.random() * i);
 }
 
 function reset(){
