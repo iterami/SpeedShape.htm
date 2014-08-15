@@ -102,7 +102,7 @@ function randomize_shapes(){
 function reset(){
     if(confirm('Reset settings?')){
         document.getElementById('audio-volume').value = 1;
-        document.getElementById('clear').checked = 1;
+        document.getElementById('clear').checked = true;
         document.getElementById('reds').value = 10;
         document.getElementById('restart-key').value = 'H';
         document.getElementById('time-limit').value = 30;
