@@ -9,14 +9,12 @@ function decisecond(){
 }
 
 function draw(){
-    if(settings[4]){// Clear?
-        buffer.clearRect(
-          0,
-          0,
-          width,
-          height
-        );
-    }
+    buffer.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
 
     var loop_counter = reds.length - 1;
     if(loop_counter >= 0){
@@ -51,14 +49,12 @@ function draw(){
       55
     );
 
-    if(settings[4]){// Clear?
-        canvas.clearRect(
-          0,
-          0,
-          width,
-          height
-        );
-    }
+    canvas.clearRect(
+      0,
+      0,
+      width,
+      height
+    );
     canvas.drawImage(
       document.getElementById('buffer'),
       0,
@@ -102,7 +98,6 @@ function randomize_shapes(){
 function reset(){
     if(confirm('Reset settings?')){
         document.getElementById('audio-volume').value = 1;
-        document.getElementById('clear').checked = true;
         document.getElementById('reds').value = 10;
         document.getElementById('restart-key').value = 'H';
         document.getElementById('time-limit').value = 30;
@@ -168,17 +163,6 @@ function save(){
             );
         }
     }while(loop_counter--);
-
-    settings[4] = document.getElementById('clear').checked;// Clear?
-    if(settings[4]){
-        window.localStorage.removeItem('speedshape-4');
-
-    }else{
-        window.localStorage.setItem(
-          'speedshape-4',
-          0
-        );
-    }
 }
 
 function setmode(newmode, newgame){
@@ -218,8 +202,7 @@ function setmode(newmode, newgame){
 
         document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>Speedshape.htm</b></div><hr><div class=c><ul><li><a onclick="setmode(1, 1)">Start New Game</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
           + settings[3] + '>Restart</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
-          + settings[0] + '>Audio<br><label><input '
-          + (settings[4] ? 'checked ' : '') + 'id=clear type=checkbox>Clear</label><br><input id=reds value='
+          + settings[0] + '>Audio<br><input id=reds value='
           + settings[1] + '>Red<br><input id=time-limit value='
           + settings[2] + '>Time Limit<br><a onclick=reset()>Reset Settings</a></div></div>';
     }
@@ -248,7 +231,6 @@ var settings = [
   window.localStorage.getItem('speedshape-3') === null
     ? 'H'
     : window.localStorage.getItem('speedshape-3'),// Reset Key
-  window.localStorage.getItem('speedshape-4') === null// Clear?
 ];
 var time = 0;
 var white = [];
