@@ -16,6 +16,7 @@ function draw(){
       height
     );
 
+    // Draw red shapes.
     var loop_counter = reds.length - 1;
     if(loop_counter >= 0){
         buffer.fillStyle = '#f00';
@@ -29,6 +30,7 @@ function draw(){
         }while(loop_counter--);
     }
 
+    // Draw white shape.
     buffer.fillStyle = '#fff';
     buffer.fillRect(
       white[0],
@@ -37,12 +39,15 @@ function draw(){
       white[3]
     );
 
+    // Draw time remaining.
     buffer.font = '23pt sans-serif';
     buffer.fillText(
       'Time: ' + time + '/' + settings['time-limit'],
       5,
       25
     );
+
+    // Draw score.
     buffer.fillText(
       'Score: ' + score,
       5,
@@ -63,14 +68,14 @@ function draw(){
 }
 
 function play_audio(id){
-    if(settings['audio-volume'] > 0){// Audio Volume
+    if(settings['audio-volume'] > 0){
         document.getElementById(id).currentTime = 0;
         document.getElementById(id).play();
     }
 }
 
 function randomize_shapes(){
-    if(settings['reds'] > 0){// Number of Reds
+    if(settings['reds'] > 0){
         reds.length = 0;
         var loop_counter = settings['reds'] - 1;
         do{
@@ -78,7 +83,7 @@ function randomize_shapes(){
               Math.floor(Math.random() * width) - 21,
               Math.floor(Math.random() * height) - 21,
               Math.floor(Math.random() * 200) + 42,
-              Math.floor(Math.random() * 200) + 42
+              Math.floor(Math.random() * 200) + 42,
             ]);
         }while(loop_counter--);
     }
@@ -87,7 +92,7 @@ function randomize_shapes(){
       Math.floor(Math.random() * width) - 9,
       Math.floor(Math.random() * height) - 9,
       Math.floor(Math.random() * 99) + 20,
-      Math.floor(Math.random() * 99) + 20
+      Math.floor(Math.random() * 99) + 20,
     ];
 
     if(time <= 0){
@@ -188,7 +193,7 @@ function setmode(newmode, newgame){
 
     reds.length = 0;
 
-    // new game mode
+    // New game mode.
     if(mode > 0){
         if(newgame){
             save();
@@ -212,7 +217,7 @@ function setmode(newmode, newgame){
           100
         );
 
-    // main menu mode
+    // Main menu mode.
     }else{
         buffer = 0;
         canvas = 0;
@@ -256,48 +261,54 @@ var width = 0;
 setmode(0,0);
 
 window.onkeydown = function(e){
-    if(mode>0){
-        var key = window.event ? event : e;
-        key = key.charCode ? key.charCode : key.keyCode;
+    if(mode <= 0){
+        return;
+    }
 
-        if(String.fromCharCode(key) === settings['restart-key']){// Restart Key?
-            setmode(1, 0);
+    var key = window.event ? event : e;
+    key = key.charCode ? key.charCode : key.keyCode;
 
-        }else if(key === 27){// ESC
-            setmode(0, 0);
-        }
+    // settings['restart-key']: restart the current game.
+    if(String.fromCharCode(key) === settings['restart-key']){
+        setmode(1, 0);
+
+    // ESC: return to main menu.
+    }else if(key === 27){
+        setmode(0, 0);
     }
 };
 
 window.onmousedown = function(e){
-    if(mode > 0
-      && time > 0){
-        e.preventDefault();
+    if(mode <= 0
+      || time <= 0){
+        return;
+    }
 
-        mouse_x = e.pageX;
-        mouse_y = e.pageY;
+    e.preventDefault();
 
-        if(mouse_x > white[0]
-          && mouse_x < white[0] + white[2]
-          && mouse_y > white[1]
-          && mouse_y < white[1] + white[3]){
-            score += 1;
-            randomize_shapes();
+    mouse_x = e.pageX;
+    mouse_y = e.pageY;
 
-        }else{
-            var loop_counter = reds.length-1;
-            if(loop_counter >= 0){
-                do{
-                    if(mouse_x > reds[loop_counter][0]
-                      && mouse_x < reds[loop_counter][0] + reds[loop_counter][2]
-                      && mouse_y > reds[loop_counter][1]
-                      && mouse_y < reds[loop_counter][1] + reds[loop_counter][3]){
-                        score -= 1;
-                        randomize_shapes();
-                        break;
-                    }
-                }while(loop_counter--);
-            }
+    if(mouse_x > white[0]
+      && mouse_x < white[0] + white[2]
+      && mouse_y > white[1]
+      && mouse_y < white[1] + white[3]){
+        score += 1;
+        randomize_shapes();
+
+    }else{
+        var loop_counter = reds.length-1;
+        if(loop_counter >= 0){
+            do{
+                if(mouse_x > reds[loop_counter][0]
+                  && mouse_x < reds[loop_counter][0] + reds[loop_counter][2]
+                  && mouse_y > reds[loop_counter][1]
+                  && mouse_y < reds[loop_counter][1] + reds[loop_counter][3]){
+                    score -= 1;
+                    randomize_shapes();
+                    break;
+                }
+            }while(loop_counter--);
         }
     }
 };
