@@ -101,31 +101,36 @@ function randomize_shapes(){
 }
 
 function reset(){
-    if(confirm('Reset settings?')){
-        document.getElementById('audio-volume').value = 1;
-        document.getElementById('reds').value = 10;
-        document.getElementById('restart-key').value = 'H';
-        document.getElementById('time-limit').value = 30;
-        save();
+    if(!confirm('Reset settings?')){
+        return;
     }
+
+    document.getElementById('audio-volume').value = 1;
+    document.getElementById('reds').value = 10;
+    document.getElementById('restart-key').value = 'H';
+    document.getElementById('time-limit').value = 30;
+
+    save();
 }
 
 function resize(){
-    if(mode > 0){
-        height = window.innerHeight;
-        document.getElementById('buffer').height = height;
-        document.getElementById('canvas').height = height;
+    if(mode <= 0){
+        return;
+    }
 
-        width = window.innerWidth;
-        document.getElementById('buffer').width = width;
-        document.getElementById('canvas').width = width;
+    height = window.innerHeight;
+    document.getElementById('buffer').height = height;
+    document.getElementById('canvas').height = height;
 
-        if(time > 0){
-            randomize_shapes();
+    width = window.innerWidth;
+    document.getElementById('buffer').width = width;
+    document.getElementById('canvas').width = width;
 
-        }else{
-            draw();
-        }
+    if(time > 0){
+        randomize_shapes();
+
+    }else{
+        draw();
     }
 }
 
