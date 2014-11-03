@@ -239,7 +239,6 @@ var buffer = 0;
 var canvas = 0;
 var height = 0;
 var interval = 0;
-var j = 0;
 var mode = 0;
 var mouse_x = 0;
 var mouse_y = 0;
