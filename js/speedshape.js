@@ -295,27 +295,29 @@ window.onmousedown = function(e){
     mouse_x = e.pageX;
     mouse_y = e.pageY;
 
-    if(mouse_x > white[0]
-      && mouse_x < white[0] + white[2]
-      && mouse_y > white[1]
-      && mouse_y < white[1] + white[3]){
-        score += 1;
-        randomize_shapes();
-
-    }else{
+    if(mouse_x <= white[0]
+      || mouse_x >= white[0] + white[2]
+      || mouse_y <= white[1]
+      || mouse_y >= white[1] + white[3]){
         var loop_counter = reds.length-1;
         if(loop_counter >= 0){
             do{
-                if(mouse_x > reds[loop_counter][0]
-                  && mouse_x < reds[loop_counter][0] + reds[loop_counter][2]
-                  && mouse_y > reds[loop_counter][1]
-                  && mouse_y < reds[loop_counter][1] + reds[loop_counter][3]){
-                    score -= 1;
-                    randomize_shapes();
-                    break;
+                if(mouse_x <= reds[loop_counter][0]
+                  || mouse_x >= reds[loop_counter][0] + reds[loop_counter][2]
+                  || mouse_y <= reds[loop_counter][1]
+                  || mouse_y >= reds[loop_counter][1] + reds[loop_counter][3]){
+                    continue;
                 }
+
+                score -= 1;
+                randomize_shapes();
+                break;
             }while(loop_counter--);
         }
+
+    }else{
+        score += 1;
+        randomize_shapes();
     }
 };
 
