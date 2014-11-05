@@ -208,9 +208,11 @@ function setmode(newmode, newgame){
         time = settings['time-limit'];
 
         if(newgame){
-            document.getElementById('page').innerHTML = '<canvas id=canvas oncontextmenu="return false"></canvas>';
+            document.getElementById('page').innerHTML = '<canvas id=canvas oncontextmenu="return false"></canvas><canvas id=buffer style=display:none></canvas>';
+
             buffer = document.getElementById('buffer').getContext('2d');
             canvas = document.getElementById('canvas').getContext('2d');
+
             resize();
 
         }else{
