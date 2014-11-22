@@ -271,8 +271,7 @@ window.onkeydown = function(e){
         return;
     }
 
-    var key = window.event ? event : e;
-    key = key.charCode ? key.charCode : key.keyCode;
+    var key = e.keyCode || e.which;
 
     // settings['restart-key']: restart the current game.
     if(String.fromCharCode(key) === settings['restart-key']){
@@ -284,7 +283,8 @@ window.onkeydown = function(e){
     }
 };
 
-window.onmousedown = function(e){
+window.onmousedown =
+  window.ontouchstart = function(e){
     if(mode <= 0
       || time <= 0){
         return;
