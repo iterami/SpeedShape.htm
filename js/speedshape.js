@@ -1,13 +1,3 @@
-function decisecond(){
-    time = (time - .1).toFixed(1);
-
-    if(time <= 0){
-        clearInterval(interval);
-    }
-
-    draw();
-}
-
 function draw(){
     buffer.clearRect(
       0,
@@ -65,6 +55,16 @@ function draw(){
       0,
       0
     );
+
+    window.requestAnimationFrame(draw);
+}
+
+function logic(){
+    time = (time - .1).toFixed(1);
+
+    if(time <= 0){
+        clearInterval(interval);
+    }
 }
 
 function play_audio(id){
@@ -219,8 +219,9 @@ function setmode(newmode, newgame){
             randomize_shapes();
         }
 
+        window.requestAnimationFrame(draw);
         interval = setInterval(
-          'decisecond()',
+          'logic()',
           100
         );
 
