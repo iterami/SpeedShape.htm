@@ -56,7 +56,7 @@ function draw(){
       0
     );
 
-    window.requestAnimationFrame(draw);
+    animationFrame = window.requestAnimationFrame(draw);
 }
 
 function logic(){
@@ -193,6 +193,7 @@ function save(){
 }
 
 function setmode(newmode, newgame){
+    window.cancelAnimationFrame(animationFrame);
     clearInterval(interval);
     mode = newmode;
 
@@ -219,7 +220,7 @@ function setmode(newmode, newgame){
             randomize_shapes();
         }
 
-        window.requestAnimationFrame(draw);
+        animationFrame = window.requestAnimationFrame(draw);
         interval = setInterval(
           'logic()',
           100
@@ -238,6 +239,7 @@ function setmode(newmode, newgame){
     }
 }
 
+var animationFrame = 0;
 var buffer = 0;
 var canvas = 0;
 var height = 0;
