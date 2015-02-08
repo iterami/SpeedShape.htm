@@ -63,7 +63,7 @@ function logic(){
     time = (time - .1).toFixed(1);
 
     if(time <= 0){
-        clearInterval(interval);
+        window.clearInterval(interval);
     }
 }
 
@@ -194,10 +194,11 @@ function save(){
 
 function setmode(newmode, newgame){
     window.cancelAnimationFrame(animationFrame);
-    clearInterval(interval);
-    mode = newmode;
+    window.clearInterval(interval);
 
     reds.length = 0;
+
+    mode = newmode;
 
     // New game mode.
     if(mode > 0){
@@ -221,7 +222,7 @@ function setmode(newmode, newgame){
         }
 
         animationFrame = window.requestAnimationFrame(draw);
-        interval = setInterval(
+        interval = window.setInterval(
           'logic()',
           100
         );
