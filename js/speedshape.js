@@ -7,17 +7,14 @@ function draw(){
     );
 
     // Draw red shapes.
-    var loop_counter = reds.length - 1;
-    if(loop_counter >= 0){
-        buffer.fillStyle = '#f00';
-        do{
-            buffer.fillRect(
-              reds[loop_counter][0],
-              reds[loop_counter][1],
-              reds[loop_counter][2],
-              reds[loop_counter][3]
-            );
-        }while(loop_counter--);
+    buffer.fillStyle = '#f00';
+    for(var red in reds){
+        buffer.fillRect(
+          reds[red][0],
+          reds[red][1],
+          reds[red][2],
+          reds[red][3]
+        );
     }
 
     // Draw white shape.
@@ -303,20 +300,17 @@ window.onmousedown =
       || mouse_x >= white[0] + white[2]
       || mouse_y <= white[1]
       || mouse_y >= white[1] + white[3]){
-        var loop_counter = reds.length-1;
-        if(loop_counter >= 0){
-            do{
-                if(mouse_x <= reds[loop_counter][0]
-                  || mouse_x >= reds[loop_counter][0] + reds[loop_counter][2]
-                  || mouse_y <= reds[loop_counter][1]
-                  || mouse_y >= reds[loop_counter][1] + reds[loop_counter][3]){
-                    continue;
-                }
+        for(var red in reds){
+            if(mouse_x <= reds[red][0]
+              || mouse_x >= reds[red][0] + reds[red][2]
+              || mouse_y <= reds[red][1]
+              || mouse_y >= reds[red][1] + reds[red][3]){
+                continue;
+            }
 
-                score -= 1;
-                randomize_shapes();
-                break;
-            }while(loop_counter--);
+            score -= 1;
+            randomize_shapes();
+            break;
         }
 
     }else{
