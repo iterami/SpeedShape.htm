@@ -65,10 +65,12 @@ function logic(){
 }
 
 function play_audio(id){
-    if(settings['audio-volume'] > 0){
-        document.getElementById(id).currentTime = 0;
-        document.getElementById(id).play();
+    if(settings['audio-volume'] <= 0){
+        return;
     }
+
+    document.getElementById(id).currentTime = 0;
+    document.getElementById(id).play();
 }
 
 function randomize_shapes(){
@@ -131,8 +133,8 @@ function resize(){
     }
 }
 
+// Save settings into window.localStorage if they differ from default.
 function save(){
-    // Save audio-volume setting.
     if(document.getElementById('audio-volume').value == 1){
         window.localStorage.removeItem('SpeedShape.htm-audio-volume');
         settings['audio-volume'] = 1;
@@ -145,7 +147,6 @@ function save(){
         );
     }
 
-    // Save reds setting.
     if(document.getElementById('reds').value == 10
       || isNaN(document.getElementById('reds').value)
       || document.getElementById('reds').value < 0){
@@ -160,7 +161,6 @@ function save(){
         );
     }
 
-    // Save restart-key setting.
     if(document.getElementById('restart-key').value === 'H'){
         window.localStorage.removeItem('SpeedShape.htm-restart-key');
         settings['restart-key'] = 'H';
@@ -173,7 +173,6 @@ function save(){
         );
     }
 
-    // Save time-limit setting.
     if(document.getElementById('time-limit').value == 30
       || isNaN(document.getElementById('time-limit').value)
       || document.getElementById('time-limit').value < 1){
@@ -229,7 +228,7 @@ function setmode(newmode, newgame){
         buffer = 0;
         canvas = 0;
 
-        document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><b>SpeedShape.htm</b></div><hr><div class=c><ul><li><a onclick="setmode(1, 1)">Start New Game</a></ul></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
+        document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><a onclick="setmode(1, 1)">Start New Game</a></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
           + settings['restart-key'] + '>Restart</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
           + settings['audio-volume'] + '>Audio<br><input id=reds value='
           + settings['reds'] + '>Red<br><input id=time-limit value='
