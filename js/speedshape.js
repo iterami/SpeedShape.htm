@@ -247,18 +247,10 @@ var mouse_y = 0;
 var reds = [];
 var score = 0;
 var settings = {
-  'audio-volume': window.localStorage.getItem('SpeedShape.htm-audio-volume') === null
-    ? 1
-    : parseFloat(window.localStorage.getItem('SpeedShape.htm-audio-volume')),
-  'reds': window.localStorage.getItem('SpeedShape.htm-reds') === null
-    ? 10
-    : parseInt(window.localStorage.getItem('SpeedShape.htm-reds')),
-  'restart-key': window.localStorage.getItem('SpeedShape.htm-restart-key') === null
-    ? 'H'
-    : window.localStorage.getItem('SpeedShape.htm-restart-key'),
-  'time-limit': window.localStorage.getItem('SpeedShape.htm-time-limit') === null
-    ? 30
-    : parseInt(window.localStorage.getItem('SpeedShape.htm-time-limit')),
+  'audio-volume': parseFloat(window.localStorage.getItem('SpeedShape.htm-audio-volume')) || 1,
+  'reds': parseInt(window.localStorage.getItem('SpeedShape.htm-reds')) || 10,
+  'restart-key': window.localStorage.getItem('SpeedShape.htm-restart-key') || 'H',
+  'time-limit': parseInt(window.localStorage.getItem('SpeedShape.htm-time-limit')) || 30,
 };
 var time = 0;
 var white = [];
