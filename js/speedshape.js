@@ -256,8 +256,6 @@ var time = 0;
 var white = [];
 var width = 0;
 
-setmode(0,0);
-
 window.onkeydown = function(e){
     if(mode <= 0){
         return;
@@ -273,6 +271,10 @@ window.onkeydown = function(e){
     }else if(key === 27){
         setmode(0, 0);
     }
+};
+
+window.onload = function(e){
+    setmode(0, 0);
 };
 
 window.onmousedown =
