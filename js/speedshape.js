@@ -223,17 +223,18 @@ function setmode(newmode, newgame){
           100
         );
 
-    // Main menu mode.
-    }else{
-        buffer = 0;
-        canvas = 0;
-
-        document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><a onclick="setmode(1, 1)">Start New Game</a></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
-          + settings['restart-key'] + '>Restart</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
-          + settings['audio-volume'] + '>Audio<br><input id=reds value='
-          + settings['reds'] + '>Red<br><input id=time-limit value='
-          + settings['time-limit'] + '>Time Limit<br><a onclick=reset()>Reset Settings</a></div></div>';
+        return;
     }
+
+    // Main menu mode.
+    buffer = 0;
+    canvas = 0;
+
+    document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><a onclick="setmode(1, true)">Start New Game</a></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled style=border:0 value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
+      + settings['restart-key'] + '>Restart</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
+      + settings['audio-volume'] + '>Audio<br><input id=reds value='
+      + settings['reds'] + '>Red<br><input id=time-limit value='
+      + settings['time-limit'] + '>Time Limit<br><a onclick=reset()>Reset Settings</a></div></div>';
 }
 
 var animationFrame = 0;
@@ -265,16 +266,25 @@ window.onkeydown = function(e){
 
     // settings['restart-key']: restart the current game.
     if(String.fromCharCode(key) === settings['restart-key']){
-        setmode(1, 0);
+        setmode(
+          1,
+          false
+        );
 
     // ESC: return to main menu.
     }else if(key === 27){
-        setmode(0, 0);
+        setmode(
+          0,
+          false
+        );
     }
 };
 
 window.onload = function(e){
-    setmode(0, 0);
+    setmode(
+      0,
+      false
+    );
 };
 
 window.onmousedown =
