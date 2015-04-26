@@ -6,6 +6,7 @@ A web-based game in which you must click the randomly generated canvas shapes as
 ---
 
 Action              | Key
---------------------|----
+--------------------|-----------------
+Click Shape         | Left Mouse Click
 Restart             | H
 Return to Main Menu | ESC
