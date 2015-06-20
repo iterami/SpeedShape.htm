@@ -6,28 +6,20 @@ function draw(){
       height
     );
 
-    // Draw red shapes.
-    buffer.fillStyle = '#f00';
-    for(var red in reds){
+    // Draw shapes.
+    for(var shape in shapes){
+        buffer.fillStyle = shapes[shape]['color'];
         buffer.fillRect(
-          reds[red][0],
-          reds[red][1],
-          reds[red][2],
-          reds[red][3]
+          shapes[shape]['x'],
+          shapes[shape]['y'],
+          shapes[shape]['width'],
+          shapes[shape]['height']
         );
     }
 
-    // Draw white shape.
-    buffer.fillStyle = '#fff';
-    buffer.fillRect(
-      white[0],
-      white[1],
-      white[2],
-      white[3]
-    );
-
     // Draw time remaining.
     buffer.font = '23pt sans-serif';
+    buffer.fillStyle = '#fff';
     buffer.fillText(
       'Time: ' + time + '/' + settings['time-limit'],
       5,
@@ -74,25 +66,34 @@ function play_audio(id){
 }
 
 function randomize_shapes(){
+    shapes.length = 0;
+
     if(settings['reds'] > 0){
-        reds.length = 0;
         var loop_counter = settings['reds'] - 1;
         do{
-            reds.push([
-              Math.floor(Math.random() * width) - 21,
-              Math.floor(Math.random() * height) - 21,
-              Math.floor(Math.random() * 200) + 42,
-              Math.floor(Math.random() * 200) + 42,
-            ]);
+            shapes.push({
+              'color': '#f00',
+              'height': Math.floor(Math.random() * 200) + 42,
+              'score': -1,
+              'width': Math.floor(Math.random() * 200) + 42,
+              'x': Math.floor(Math.random() * width) - 21,
+              'y': Math.floor(Math.random() * height) - 21,
+            });
         }while(loop_counter--);
     }
-
-    white = [
-      Math.floor(Math.random() * width) - 9,
-      Math.floor(Math.random() * height) - 9,
-      Math.floor(Math.random() * 99) + 20,
-      Math.floor(Math.random() * 99) + 20,
-    ];
+    if(settings['whites'] > 0){
+        var loop_counter = settings['whites'] - 1;
+        do{
+            shapes.push({
+              'color': '#fff',
+              'height': Math.floor(Math.random() * 99) + 20,
+              'score': 1,
+              'width': Math.floor(Math.random() * 99) + 20,
+              'x': Math.floor(Math.random() * width) - 9,
+              'y': Math.floor(Math.random() * height) - 9,
+            });
+        }while(loop_counter--);
+    }
 
     if(time <= 0){
         draw();
@@ -108,6 +109,7 @@ function reset(){
     document.getElementById('reds').value = 10;
     document.getElementById('restart-key').value = 'H';
     document.getElementById('time-limit').value = 30;
+    document.getElementById('whites').value = 1;
 
     save();
 }
@@ -147,18 +149,24 @@ function save(){
         );
     }
 
-    if(document.getElementById('reds').value == 10
-      || isNaN(document.getElementById('reds').value)
-      || document.getElementById('reds').value < 0){
-        window.localStorage.removeItem('SpeedShape.htm-reds');
-        settings['reds'] = 10;
+    var ids = {
+      'reds': 10,
+      'time-limit': 30,
+      'whites': 1,
+    };
+    for(var id in ids){
+        if(document.getElementById(id).value == ids[id]
+          || isNaN(document.getElementById(id).value)){
+            window.localStorage.removeItem('SpeedShape.htm-' + id);
+            settings[id] = ids[id];
 
-    }else{
-        settings['reds'] = parseFloat(document.getElementById('reds').value);
-        window.localStorage.setItem(
-          'SpeedShape.htm-reds',
-          settings['reds']
-        );
+        }else{
+            settings[id] = parseFloat(document.getElementById(id).value);
+            window.localStorage.setItem(
+              'SpeedShape.htm-' + id,
+              settings[id]
+            );
+        }
     }
 
     if(document.getElementById('restart-key').value === 'H'){
@@ -172,27 +180,13 @@ function save(){
           settings['restart-key']
         );
     }
-
-    if(document.getElementById('time-limit').value == 30
-      || isNaN(document.getElementById('time-limit').value)
-      || document.getElementById('time-limit').value < 1){
-        window.localStorage.removeItem('SpeedShape.htm-time-limit');
-        settings['time-limit'] = 30;
-
-    }else{
-        settings['time-limit'] = parseFloat(document.getElementById('time-limit').value);
-        window.localStorage.setItem(
-          'SpeedShape.htm-time-limit',
-          settings['time-limit']
-        );
-    }
 }
 
 function setmode(newmode, newgame){
     window.cancelAnimationFrame(animationFrame);
     window.clearInterval(interval);
 
-    reds.length = 0;
+    shapes.length = 0;
 
     mode = newmode;
 
@@ -234,7 +228,8 @@ function setmode(newmode, newgame){
       + settings['restart-key'] + '>Restart</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
       + settings['audio-volume'] + '>Audio<br><input id=reds value='
       + settings['reds'] + '>Red<br><input id=time-limit value='
-      + settings['time-limit'] + '>Time Limit<br><a onclick=reset()>Reset Settings</a></div></div>';
+      + settings['time-limit'] + '>Time Limit<br><input id=whites value='
+      + settings['whites'] + '>Whites<br><a onclick=reset()>Reset Settings</a></div></div>';
 }
 
 var animationFrame = 0;
@@ -245,16 +240,16 @@ var interval = 0;
 var mode = 0;
 var mouse_x = 0;
 var mouse_y = 0;
-var reds = [];
 var score = 0;
 var settings = {
   'audio-volume': parseFloat(window.localStorage.getItem('SpeedShape.htm-audio-volume')) || 1,
   'reds': parseInt(window.localStorage.getItem('SpeedShape.htm-reds')) || 10,
   'restart-key': window.localStorage.getItem('SpeedShape.htm-restart-key') || 'H',
   'time-limit': parseInt(window.localStorage.getItem('SpeedShape.htm-time-limit')) || 30,
+  'whites': parseInt(window.localStorage.getItem('SpeedShape.htm-whites')) || 1,
 };
+var shapes = [];
 var time = 0;
-var white = [];
 var width = 0;
 
 window.onkeydown = function(e){
@@ -299,26 +294,17 @@ window.onmousedown =
     mouse_x = e.pageX;
     mouse_y = e.pageY;
 
-    if(mouse_x <= white[0]
-      || mouse_x >= white[0] + white[2]
-      || mouse_y <= white[1]
-      || mouse_y >= white[1] + white[3]){
-        for(var red in reds){
-            if(mouse_x <= reds[red][0]
-              || mouse_x >= reds[red][0] + reds[red][2]
-              || mouse_y <= reds[red][1]
-              || mouse_y >= reds[red][1] + reds[red][3]){
-                continue;
-            }
-
-            score -= 1;
-            randomize_shapes();
-            break;
+    for(var shape in shapes){
+        if(mouse_x <= shapes[shape][0]
+          || mouse_x >= shapes[shape][0] + shapes[shape][2]
+          || mouse_y <= shapes[shape][1]
+          || mouse_y >= shapes[shape][1] + shapes[shape][3]){
+            continue;
         }
 
-    }else{
         score += 1;
         randomize_shapes();
+        break;
     }
 };
 
