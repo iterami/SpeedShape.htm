@@ -301,10 +301,10 @@ window.onmousedown =
     mouse_y = e.pageY;
 
     for(var shape in shapes){
-        if(mouse_x <= shapes[shape][0]
-          || mouse_x >= shapes[shape][0] + shapes[shape][2]
-          || mouse_y <= shapes[shape][1]
-          || mouse_y >= shapes[shape][1] + shapes[shape][3]){
+        if(mouse_x <= shapes[shape]['x']
+          || mouse_x >= shapes[shape]['x'] + shapes[shape]['width']
+          || mouse_y <= shapes[shape]['y']
+          || mouse_y >= shapes[shape]['y'] + shapes[shape]['height']){
             continue;
         }
 
