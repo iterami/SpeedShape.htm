@@ -204,8 +204,12 @@ function setmode(newmode, newgame){
         if(newgame){
             document.getElementById('page').innerHTML = '<canvas id=canvas oncontextmenu="return false"></canvas><canvas id=buffer></canvas>';
 
-            buffer = document.getElementById('buffer').getContext('2d');
-            canvas = document.getElementById('canvas').getContext('2d');
+            buffer = document.getElementById('buffer').getContext('2d', {
+              'alpha': false,
+            });
+            canvas = document.getElementById('canvas').getContext('2d', {
+              'alpha': false,
+            });
 
             resize();
 
