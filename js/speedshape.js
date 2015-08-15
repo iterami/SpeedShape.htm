@@ -206,7 +206,7 @@ function setmode(newmode, newgame){
 
             var contextAttributes = {
               'alpha': false,
-            }
+            };
             buffer = document.getElementById('buffer').getContext(
               '2d',
               contextAttributes
