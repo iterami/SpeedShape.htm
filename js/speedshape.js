@@ -236,8 +236,8 @@ function setmode(newmode, newgame){
     buffer = 0;
     canvas = 0;
 
-    document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div class=c><a onclick="setmode(1, true)">Start New Game</a></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div class=c><input disabled value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
-      + settings['restart-key'] + '>Restart</div><hr><div class=c><input id=audio-volume max=1 min=0 step=.01 type=range value='
+    document.getElementById('page').innerHTML = '<div style=display:inline-block;text-align:left;vertical-align:top><div><a onclick="setmode(1, true)">Start New Game</a></div></div><div style="border-left:8px solid #222;display:inline-block;text-align:left"><div><input disabled value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
+      + settings['restart-key'] + '>Restart</div><hr><div><input id=audio-volume max=1 min=0 step=.01 type=range value='
       + settings['audio-volume'] + '>Audio<br><input id=reds value='
       + settings['reds'] + '>Red<br><input id=time-limit value='
       + settings['time-limit'] + '>Time Limit<br><input id=whites value='
