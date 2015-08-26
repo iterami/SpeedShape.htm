@@ -202,7 +202,7 @@ function setmode(newmode, newgame){
         time = settings['time-limit'];
 
         if(newgame){
-            document.getElementById('page').innerHTML =
+            document.body.innerHTML =
               '<canvas id=canvas oncontextmenu="return false"></canvas><canvas id=buffer></canvas>';
 
             var contextAttributes = {
@@ -236,7 +236,7 @@ function setmode(newmode, newgame){
     buffer = 0;
     canvas = 0;
 
-    document.getElementById('page').innerHTML = '<div><div><a onclick="setmode(1, true)">Start New Game</a></div></div><div class=right><div><input disabled value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
+    document.body.innerHTML = '<div><div><a onclick="setmode(1, true)">Start New Game</a></div></div><div class=right><div><input disabled value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
       + settings['restart-key'] + '>Restart</div><hr><div><input id=audio-volume max=1 min=0 step=.01 type=range value='
       + settings['audio-volume'] + '>Audio<br><input id=reds value='
       + settings['reds'] + '>Red<br><input id=time-limit value='
