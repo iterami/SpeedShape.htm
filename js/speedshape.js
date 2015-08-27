@@ -20,7 +20,6 @@ function draw(){
     }
 
     // Draw time remaining.
-    buffer.font = '23pt sans-serif';
     buffer.fillStyle = '#fff';
     buffer.fillText(
       'Time: ' + time + '/' + settings['time-limit'],
@@ -218,6 +217,8 @@ function setmode(newmode, newgame){
             );
 
             resize();
+
+            buffer.font = '23pt sans-serif';
 
         }else{
             randomize_shapes();
