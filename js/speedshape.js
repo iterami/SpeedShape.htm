@@ -134,6 +134,8 @@ function resize(){
     }else{
         draw();
     }
+
+    buffer.font = '23pt sans-serif';
 }
 
 // Save settings into window.localStorage if they differ from default.
@@ -217,8 +219,6 @@ function setmode(newmode, newgame){
             );
 
             resize();
-
-            buffer.font = '23pt sans-serif';
 
         }else{
             randomize_shapes();
