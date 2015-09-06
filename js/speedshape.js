@@ -255,15 +255,15 @@ var mouse_x = 0;
 var mouse_y = 0;
 var score = 0;
 var settings = {
-  'audio-volume': window.localStorage.getItem('SpeedShape.htm-audio-volume') != null
+  'audio-volume': window.localStorage.getItem('SpeedShape.htm-audio-volume') !== null
     ? parseFloat(window.localStorage.getItem('SpeedShape.htm-audio-volume'))
     : 1,
-  'reds': window.localStorage.getItem('SpeedShape.htm-reds') != null
+  'reds': window.localStorage.getItem('SpeedShape.htm-reds') !== null
     ? parseInt(window.localStorage.getItem('SpeedShape.htm-reds'))
     : 10,
   'restart-key': window.localStorage.getItem('SpeedShape.htm-restart-key') || 'H',
   'time-limit': parseInt(window.localStorage.getItem('SpeedShape.htm-time-limit')) || 30,
-  'whites': window.localStorage.getItem('SpeedShape.htm-whites') != null
+  'whites': window.localStorage.getItem('SpeedShape.htm-whites') !== null
     ? parseInt(window.localStorage.getItem('SpeedShape.htm-whites'))
     : 1,
 };
