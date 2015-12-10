@@ -140,12 +140,13 @@ function resize(){
 
 // Save settings into window.localStorage if they differ from default.
 function save(){
-    if(document.getElementById('audio-volume').value == 1){
+    var audio_volume = document.getElementById('audio-volume').value;
+    if(audio_volume == 1){
         window.localStorage.removeItem('SpeedShape.htm-audio-volume');
         settings['audio-volume'] = 1;
 
     }else{
-        settings['audio-volume'] = parseFloat(document.getElementById('audio-volume').value);
+        settings['audio-volume'] = parseFloat(audio_volume);
         window.localStorage.setItem(
           'SpeedShape.htm-audio-volume',
           settings['audio-volume']
@@ -158,13 +159,14 @@ function save(){
       'whites': 1,
     };
     for(var id in ids){
-        if(document.getElementById(id).value == ids[id]
-          || isNaN(document.getElementById(id).value)){
+        var value = document.getElementById(id).value;
+        if(value == ids[id]
+          || isNaN(value)){
             window.localStorage.removeItem('SpeedShape.htm-' + id);
             settings[id] = ids[id];
 
         }else{
-            settings[id] = parseFloat(document.getElementById(id).value);
+            settings[id] = parseFloat(value);
             window.localStorage.setItem(
               'SpeedShape.htm-' + id,
               settings[id]
@@ -172,12 +174,13 @@ function save(){
         }
     }
 
-    if(document.getElementById('restart-key').value === 'H'){
+    var restart_key = document.getElementById('restart-key').value;
+    if(restart_key === 'H'){
         window.localStorage.removeItem('SpeedShape.htm-restart-key');
         settings['restart-key'] = 'H';
 
     }else{
-        settings['restart-key'] = document.getElementById('restart-key').value;
+        settings['restart-key'] = restart_key;
         window.localStorage.setItem(
           'SpeedShape.htm-restart-key',
           settings['restart-key']
