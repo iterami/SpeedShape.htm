@@ -106,11 +106,16 @@ function reset(){
         return;
     }
 
-    document.getElementById('audio-volume').value = 1;
-    document.getElementById('reds').value = 10;
-    document.getElementById('restart-key').value = 'H';
-    document.getElementById('time-limit').value = 30;
-    document.getElementById('whites').value = 1;
+    var ids = {
+      'audio-volume': 1,
+      'reds': 10,
+      'restart-key': 'H',
+      'time-limit': 30,
+      'whites': 1,
+    };
+    for(var id in ids){
+        document.getElementById(id).value = ids[id];
+    }
 
     save();
 }
