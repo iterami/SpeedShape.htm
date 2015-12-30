@@ -145,13 +145,11 @@ function resize(){
 
 // Save settings into window.localStorage if they differ from default.
 function save(){
-    var audio_volume = document.getElementById('audio-volume').value;
-    if(audio_volume == 1){
+    settings['audio-volume'] = parseFloat(document.getElementById('audio-volume').value);
+    if(settings['audio-volume'] == 1){
         window.localStorage.removeItem('SpeedShape.htm-audio-volume');
-        settings['audio-volume'] = 1;
 
     }else{
-        settings['audio-volume'] = parseFloat(audio_volume);
         window.localStorage.setItem(
           'SpeedShape.htm-audio-volume',
           settings['audio-volume']
@@ -179,13 +177,11 @@ function save(){
         }
     }
 
-    var restart_key = document.getElementById('restart-key').value;
-    if(restart_key === 'H'){
+    settings['restart-key'] = document.getElementById('restart-key').value;
+    if(settings['restart-key'] === 'H'){
         window.localStorage.removeItem('SpeedShape.htm-restart-key');
-        settings['restart-key'] = 'H';
 
     }else{
-        settings['restart-key'] = restart_key;
         window.localStorage.setItem(
           'SpeedShape.htm-restart-key',
           settings['restart-key']
