@@ -165,13 +165,13 @@ function save(){
     };
     for(var id in ids){
         var value = document.getElementById(id).value;
+        settings[id] = parseFloat(value);
+
         if(value == ids[id]
           || isNaN(value)){
             window.localStorage.removeItem('SpeedShape.htm-' + id);
-            settings[id] = ids[id];
 
         }else{
-            settings[id] = parseFloat(value);
             window.localStorage.setItem(
               'SpeedShape.htm-' + id,
               settings[id]
