@@ -162,11 +162,10 @@ function save(){
       'whites': 1,
     };
     for(var id in ids){
-        var value = document.getElementById(id).value;
-        settings[id] = parseFloat(value);
+        settings[id] = parseFloat(document.getElementById(id).value);
 
-        if(value == ids[id]
-          || isNaN(value)){
+        if(settings[id] == ids[id]
+          || isNaN(settings[id])){
             window.localStorage.removeItem('SpeedShape.htm-' + id);
 
         }else{
