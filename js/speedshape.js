@@ -229,7 +229,7 @@ function setmode(newmode, newgame){
 
         animationFrame = window.requestAnimationFrame(draw);
         interval = window.setInterval(
-          'logic()',
+          logic,
           100
         );
 
