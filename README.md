@@ -10,3 +10,8 @@ Action              | Key
 Click Shape         | Left Mouse Click
 Restart             | H
 Return to Main Menu | ESC
+
+---
+
+Requires:
+* [iterami/common](https://github.com/iterami/common)
