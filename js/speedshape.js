@@ -253,12 +253,12 @@ var settings = {
     ? parseFloat(window.localStorage.getItem('SpeedShape.htm-audio-volume'))
     : 1,
   'reds': window.localStorage.getItem('SpeedShape.htm-reds') !== null
-    ? parseInt(window.localStorage.getItem('SpeedShape.htm-reds'))
+    ? parseInt(window.localStorage.getItem('SpeedShape.htm-reds'), 10)
     : 10,
   'restart-key': window.localStorage.getItem('SpeedShape.htm-restart-key') || 'H',
-  'time-limit': parseInt(window.localStorage.getItem('SpeedShape.htm-time-limit')) || 30,
+  'time-limit': parseInt(window.localStorage.getItem('SpeedShape.htm-time-limit'), 10) || 30,
   'whites': window.localStorage.getItem('SpeedShape.htm-whites') !== null
-    ? parseInt(window.localStorage.getItem('SpeedShape.htm-whites'))
+    ? parseInt(window.localStorage.getItem('SpeedShape.htm-whites'), 10)
     : 1,
 };
 var shapes = [];
