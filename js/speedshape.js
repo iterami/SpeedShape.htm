@@ -1,13 +1,6 @@
 'use strict';
 
-function draw(){
-    buffer.clearRect(
-      0,
-      0,
-      width,
-      height
-    );
-
+function draw_logic(){
     // Draw shapes.
     for(var shape in shapes){
         buffer.fillStyle = shapes[shape]['color'];
@@ -33,20 +26,6 @@ function draw(){
       5,
       55
     );
-
-    canvas.clearRect(
-      0,
-      0,
-      width,
-      height
-    );
-    canvas.drawImage(
-      document.getElementById('buffer'),
-      0,
-      0
-    );
-
-    animationFrame = window.requestAnimationFrame(draw);
 }
 
 function logic(){
@@ -111,19 +90,7 @@ function reset(){
     save();
 }
 
-function resize(){
-    if(mode <= 0){
-        return;
-    }
-
-    height = window.innerHeight;
-    document.getElementById('buffer').height = height;
-    document.getElementById('canvas').height = height;
-
-    width = window.innerWidth;
-    document.getElementById('buffer').width = width;
-    document.getElementById('canvas').width = width;
-
+function resize_logic(){
     if(time > 0){
         randomize_shapes();
 
@@ -179,72 +146,32 @@ function save(){
     }
 }
 
-function setmode(newmode, newgame){
-    window.cancelAnimationFrame(animationFrame);
-    window.clearInterval(interval);
-
+function setmode_logic(newgame){
     shapes.length = 0;
 
-    mode = newmode;
+    // Main menu mode.
+    if(mode === 0){
+        document.body.innerHTML = '<div><div><a onclick="setmode(1, true)">Start New Game</a></div></div><div class=right><div><input disabled value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
+          + settings['restart-key'] + '>Restart</div><hr><div><input id=audio-volume max=1 min=0 step=0.01 type=range value='
+          + settings['audio-volume'] + '>Audio<br><input id=reds value='
+          + settings['reds'] + '>Red<br><input id=time-limit value='
+          + settings['time-limit'] + '>Time Limit<br><input id=whites value='
+          + settings['whites'] + '>Whites<br><a onclick=reset()>Reset Settings</a></div></div>';
 
     // New game mode.
-    if(mode > 0){
+    }else{
         if(newgame){
             save();
-        }
-
-        score = 0;
-        time = settings['time-limit'];
-
-        if(newgame){
-            document.body.innerHTML =
-              '<canvas id=canvas oncontextmenu="return false"></canvas><canvas id=buffer></canvas>';
-
-            var contextAttributes = {
-              'alpha': false,
-            };
-            buffer = document.getElementById('buffer').getContext(
-              '2d',
-              contextAttributes
-            );
-            canvas = document.getElementById('canvas').getContext(
-              '2d',
-              contextAttributes
-            );
-
-            resize();
 
         }else{
             randomize_shapes();
         }
 
-        animationFrame = window.requestAnimationFrame(draw);
-        interval = window.setInterval(
-          logic,
-          100
-        );
-
-        return;
+        score = 0;
+        time = settings['time-limit'];
     }
-
-    // Main menu mode.
-    buffer = 0;
-    canvas = 0;
-
-    document.body.innerHTML = '<div><div><a onclick="setmode(1, true)">Start New Game</a></div></div><div class=right><div><input disabled value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
-      + settings['restart-key'] + '>Restart</div><hr><div><input id=audio-volume max=1 min=0 step=0.01 type=range value='
-      + settings['audio-volume'] + '>Audio<br><input id=reds value='
-      + settings['reds'] + '>Red<br><input id=time-limit value='
-      + settings['time-limit'] + '>Time Limit<br><input id=whites value='
-      + settings['whites'] + '>Whites<br><a onclick=reset()>Reset Settings</a></div></div>';
 }
 
-var animationFrame = 0;
-var buffer = 0;
-var canvas = 0;
-var height = 0;
-var interval = 0;
-var mode = 0;
 var mouse_x = 0;
 var mouse_y = 0;
 var score = 0;
@@ -252,6 +179,7 @@ var settings = {
   'audio-volume': window.localStorage.getItem('SpeedShape.htm-audio-volume') !== null
     ? parseFloat(window.localStorage.getItem('SpeedShape.htm-audio-volume'))
     : 1,
+  'ms-per-frame': 100,
   'reds': window.localStorage.getItem('SpeedShape.htm-reds') !== null
     ? parseInt(window.localStorage.getItem('SpeedShape.htm-reds'), 10)
     : 10,
@@ -263,7 +191,6 @@ var settings = {
 };
 var shapes = [];
 var time = 0;
-var width = 0;
 
 window.onkeydown = function(e){
     if(mode <= 0){
@@ -288,12 +215,7 @@ window.onkeydown = function(e){
     }
 };
 
-window.onload = function(e){
-    setmode(
-      0,
-      false
-    );
-};
+window.onload = init_canvas;
 
 window.onmousedown =
   window.ontouchstart = function(e){
@@ -320,5 +242,3 @@ window.onmousedown =
         break;
     }
 };
-
-window.onresize = resize;
