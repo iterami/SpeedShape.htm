@@ -71,25 +71,6 @@ function randomize_shapes(){
     }
 }
 
-function reset(){
-    if(!window.confirm('Reset settings?')){
-        return;
-    }
-
-    var ids = {
-      'audio-volume': 1,
-      'reds': 10,
-      'restart-key': 'H',
-      'time-limit': 30,
-      'whites': 1,
-    };
-    for(var id in ids){
-        document.getElementById(id).value = ids[id];
-    }
-
-    save();
-}
-
 function resize_logic(){
     if(time > 0){
         randomize_shapes();
@@ -101,51 +82,6 @@ function resize_logic(){
     buffer.font = '23pt sans-serif';
 }
 
-// Save settings into window.localStorage if they differ from default.
-function save(){
-    settings['audio-volume'] = parseFloat(document.getElementById('audio-volume').value);
-    if(settings['audio-volume'] === 1){
-        window.localStorage.removeItem('SpeedShape.htm-audio-volume');
-
-    }else{
-        window.localStorage.setItem(
-          'SpeedShape.htm-audio-volume',
-          settings['audio-volume']
-        );
-    }
-
-    var ids = {
-      'reds': 10,
-      'time-limit': 30,
-      'whites': 1,
-    };
-    for(var id in ids){
-        settings[id] = parseFloat(document.getElementById(id).value);
-
-        if(settings[id] == ids[id]
-          || isNaN(settings[id])){
-            window.localStorage.removeItem('SpeedShape.htm-' + id);
-
-        }else{
-            window.localStorage.setItem(
-              'SpeedShape.htm-' + id,
-              settings[id]
-            );
-        }
-    }
-
-    settings['restart-key'] = document.getElementById('restart-key').value;
-    if(settings['restart-key'] === 'H'){
-        window.localStorage.removeItem('SpeedShape.htm-restart-key');
-
-    }else{
-        window.localStorage.setItem(
-          'SpeedShape.htm-restart-key',
-          settings['restart-key']
-        );
-    }
-}
-
 function setmode_logic(newgame){
     shapes.length = 0;
 
@@ -153,7 +89,8 @@ function setmode_logic(newgame){
     if(mode === 0){
         document.body.innerHTML = '<div><div><a onclick="setmode(1, true)">Start New Game</a></div></div><div class=right><div><input disabled value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
           + settings['restart-key'] + '>Restart</div><hr><div><input id=audio-volume max=1 min=0 step=0.01 type=range value='
-          + settings['audio-volume'] + '>Audio<br><input id=reds value='
+          + settings['audio-volume'] + '>Audio<br><input id=ms-per-frame value='
+          + settings['ms-per-frame'] + '>ms/Frame<br><input id=reds value='
           + settings['reds'] + '>Red<br><input id=time-limit value='
           + settings['time-limit'] + '>Time Limit<br><input id=whites value='
           + settings['whites'] + '>Whites<br><a onclick=reset()>Reset Settings</a></div></div>';
@@ -175,20 +112,6 @@ function setmode_logic(newgame){
 var mouse_x = 0;
 var mouse_y = 0;
 var score = 0;
-var settings = {
-  'audio-volume': window.localStorage.getItem('SpeedShape.htm-audio-volume') !== null
-    ? parseFloat(window.localStorage.getItem('SpeedShape.htm-audio-volume'))
-    : 1,
-  'ms-per-frame': 100,
-  'reds': window.localStorage.getItem('SpeedShape.htm-reds') !== null
-    ? parseInt(window.localStorage.getItem('SpeedShape.htm-reds'), 10)
-    : 10,
-  'restart-key': window.localStorage.getItem('SpeedShape.htm-restart-key') || 'H',
-  'time-limit': parseInt(window.localStorage.getItem('SpeedShape.htm-time-limit'), 10) || 30,
-  'whites': window.localStorage.getItem('SpeedShape.htm-whites') !== null
-    ? parseInt(window.localStorage.getItem('SpeedShape.htm-whites'), 10)
-    : 1,
-};
 var shapes = [];
 var time = 0;
 
@@ -215,7 +138,20 @@ window.onkeydown = function(e){
     }
 };
 
-window.onload = init_canvas;
+window.onload = function(){
+    init_settings(
+      'SpeedShape.htm-',
+      {
+        'audio-volume': 1,
+        'ms-per-frame': 100,
+        'reds': 10,
+        'restart-key': 'H',
+        'time-limit': 30,
+        'whites': 1,
+      }
+    );
+    init_canvas();
+};
 
 window.onmousedown =
   window.ontouchstart = function(e){
