@@ -87,13 +87,16 @@ function setmode_logic(newgame){
 
     // Main menu mode.
     if(mode === 0){
-        document.body.innerHTML = '<div><div><a onclick="setmode(1, true)">Start New Game</a></div></div><div class=right><div><input disabled value=ESC>Main Menu<br><input id=restart-key maxlength=1 value='
-          + settings['restart-key'] + '>Restart</div><hr><div><input id=audio-volume max=1 min=0 step=0.01 type=range value='
-          + settings['audio-volume'] + '>Audio<br><input id=ms-per-frame value='
-          + settings['ms-per-frame'] + '>ms/Frame<br><input id=reds value='
-          + settings['reds'] + '>Red<br><input id=time-limit value='
-          + settings['time-limit'] + '>Time Limit<br><input id=whites value='
-          + settings['whites'] + '>Whites<br><a onclick=reset()>Reset Settings</a></div></div>';
+        document.body.innerHTML = '<div><div><a onclick="setmode(1, true)">Start New Game</a></div></div>'
+          + '<div class=right><div><input disabled value=ESC>Main Menu<br>'
+          + '<input id=restart-key maxlength=1>Restart</div><hr>'
+          + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
+          + '<input id=ms-per-frame>ms/Frame<br>'
+          + '<input id=reds>Red<br>'
+          + '<input id=time-limit>Time Limit<br>'
+          + '<input id=whites>Whites<br>'
+          + '<a onclick=reset()>Reset Settings</a></div></div>';
+        update_settings();
 
     // New game mode.
     }else{
