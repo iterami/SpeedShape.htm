@@ -39,8 +39,8 @@ function logic(){
 function randomize_shapes(){
     shapes.length = 0;
 
-    if(settings['reds'] > 0){
-        var loop_counter = settings['reds'] - 1;
+    if(settings['red'] > 0){
+        var loop_counter = settings['red'] - 1;
         do{
             shapes.push({
               'color': '#f00',
@@ -52,8 +52,8 @@ function randomize_shapes(){
             });
         }while(loop_counter--);
     }
-    if(settings['whites'] > 0){
-        var loop_counter = settings['whites'] - 1;
+    if(settings['white'] > 0){
+        var loop_counter = settings['white'] - 1;
         do{
             shapes.push({
               'color': '#fff',
@@ -92,9 +92,9 @@ function setmode_logic(newgame){
           + '<input id=restart-key maxlength=1>Restart</div><hr>'
           + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
           + '<input id=ms-per-frame>ms/Frame<br>'
-          + '<input id=reds>Red<br>'
+          + '<input id=red>Red<br>'
           + '<input id=time-limit>Time Limit<br>'
-          + '<input id=whites>Whites<br>'
+          + '<input id=white>White<br>'
           + '<a onclick=reset()>Reset Settings</a></div></div>';
         update_settings();
 
@@ -147,10 +147,10 @@ window.onload = function(){
       {
         'audio-volume': 1,
         'ms-per-frame': 100,
-        'reds': 10,
+        'red': 10,
         'restart-key': 'H',
         'time-limit': 30,
-        'whites': 1,
+        'white': 1,
       }
     );
     init_canvas();
