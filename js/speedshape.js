@@ -79,7 +79,7 @@ function resize_logic(){
         draw();
     }
 
-    buffer.font = '23pt sans-serif';
+    buffer.font = font;
 }
 
 function setmode_logic(newgame){
