@@ -78,8 +78,6 @@ function resize_logic(){
     }else{
         draw();
     }
-
-    buffer.font = font;
 }
 
 function setmode_logic(newgame){
