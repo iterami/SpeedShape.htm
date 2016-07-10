@@ -15,7 +15,7 @@ function draw_logic(){
     // Draw time remaining.
     buffer.fillStyle = '#fff';
     buffer.fillText(
-      'Time: ' + time + '/' + settings['time-limit'],
+      'Time: ' + time + '/' + settings_settings['time-limit'],
       5,
       25
     );
@@ -39,8 +39,8 @@ function logic(){
 function randomize_shapes(){
     shapes.length = 0;
 
-    if(settings['red'] > 0){
-        var loop_counter = settings['red'] - 1;
+    if(settings_settings['red'] > 0){
+        var loop_counter = settings_settings['red'] - 1;
         do{
             shapes.push({
               'color': '#f00',
@@ -52,8 +52,8 @@ function randomize_shapes(){
             });
         }while(loop_counter--);
     }
-    if(settings['white'] > 0){
-        var loop_counter = settings['white'] - 1;
+    if(settings_settings['white'] > 0){
+        var loop_counter = settings_settings['white'] - 1;
         do{
             shapes.push({
               'color': '#fff',
@@ -93,20 +93,20 @@ function setmode_logic(newgame){
           + '<input id=red>Red<br>'
           + '<input id=time-limit>Time Limit<br>'
           + '<input id=white>White<br>'
-          + '<a onclick=reset()>Reset Settings</a></div></div>';
-        update_settings();
+          + '<a onclick=settings_reset()>Reset Settings</a></div></div>';
+        settings_update();
 
     // New game mode.
     }else{
         if(newgame){
-            save();
+            settings_save();
 
         }else{
             randomize_shapes();
         }
 
         score = 0;
-        time = settings['time-limit'];
+        time = settings_settings['time-limit'];
     }
 }
 
@@ -123,8 +123,8 @@ window.onkeydown = function(e){
 
     var key = e.keyCode || e.which;
 
-    // settings['restart-key']: restart the current game.
-    if(String.fromCharCode(key) === settings['restart-key']){
+    // settings_settings['restart-key']: restart the current game.
+    if(String.fromCharCode(key) === settings_settings['restart-key']){
         setmode(
           1,
           false
@@ -140,7 +140,7 @@ window.onkeydown = function(e){
 };
 
 window.onload = function(){
-    init_settings(
+    settings_init(
       'SpeedShape.htm-',
       {
         'audio-volume': 1,
