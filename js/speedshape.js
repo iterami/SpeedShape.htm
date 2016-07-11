@@ -3,8 +3,8 @@
 function draw_logic(){
     // Draw shapes.
     for(var shape in shapes){
-        buffer.fillStyle = shapes[shape]['color'];
-        buffer.fillRect(
+        canvas_buffer.fillStyle = shapes[shape]['color'];
+        canvas_buffer.fillRect(
           shapes[shape]['x'],
           shapes[shape]['y'],
           shapes[shape]['width'],
@@ -13,15 +13,15 @@ function draw_logic(){
     }
 
     // Draw time remaining.
-    buffer.fillStyle = '#fff';
-    buffer.fillText(
+    canvas_buffer.fillStyle = '#fff';
+    canvas_buffer.fillText(
       'Time: ' + time + '/' + settings_settings['time-limit'],
       5,
       25
     );
 
     // Draw score.
-    buffer.fillText(
+    canvas_buffer.fillText(
       'Score: ' + score,
       5,
       55
@@ -32,7 +32,7 @@ function logic(){
     time = (time - .1).toFixed(1);
 
     if(time <= 0){
-        window.clearInterval(interval);
+        window.clearInterval(canvas_interval);
     }
 }
 
@@ -47,8 +47,8 @@ function randomize_shapes(){
               'height': Math.floor(Math.random() * 200) + 42,
               'score': -1,
               'width': Math.floor(Math.random() * 200) + 42,
-              'x': Math.floor(Math.random() * width) - 21,
-              'y': Math.floor(Math.random() * height) - 21,
+              'x': Math.floor(Math.random() * canvas_width) - 21,
+              'y': Math.floor(Math.random() * canvas_height) - 21,
             });
         }while(loop_counter--);
     }
@@ -60,14 +60,14 @@ function randomize_shapes(){
               'height': Math.floor(Math.random() * 99) + 20,
               'score': 1,
               'width': Math.floor(Math.random() * 99) + 20,
-              'x': Math.floor(Math.random() * width) - 9,
-              'y': Math.floor(Math.random() * height) - 9,
+              'x': Math.floor(Math.random() * canvas_width) - 9,
+              'y': Math.floor(Math.random() * canvas_height) - 9,
             });
         }while(loop_counter--);
     }
 
     if(time <= 0){
-        draw();
+        canvas_draw();
     }
 }
 
@@ -76,7 +76,7 @@ function resize_logic(){
         randomize_shapes();
 
     }else{
-        draw();
+        canvas_draw();
     }
 }
 
@@ -84,8 +84,8 @@ function setmode_logic(newgame){
     shapes.length = 0;
 
     // Main menu mode.
-    if(mode === 0){
-        document.body.innerHTML = '<div><div><a onclick="setmode(1, true)">Start New Game</a></div></div>'
+    if(canvas_mode === 0){
+        document.body.innerHTML = '<div><div><a onclick="canvas_setmode(1, true)">Start New Game</a></div></div>'
           + '<div class=right><div><input disabled value=ESC>Main Menu<br>'
           + '<input id=restart-key maxlength=1>Restart</div><hr>'
           + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
@@ -117,7 +117,7 @@ var shapes = [];
 var time = 0;
 
 window.onkeydown = function(e){
-    if(mode <= 0){
+    if(canvas_mode <= 0){
         return;
     }
 
@@ -125,14 +125,14 @@ window.onkeydown = function(e){
 
     // settings_settings['restart-key']: restart the current game.
     if(String.fromCharCode(key) === settings_settings['restart-key']){
-        setmode(
+        canvas_setmode(
           1,
           false
         );
 
     // ESC: return to main menu.
     }else if(key === 27){
-        setmode(
+        canvas_setmode(
           0,
           false
         );
@@ -151,12 +151,12 @@ window.onload = function(){
         'white': 1,
       }
     );
-    init_canvas();
+    canvas_init();
 };
 
 window.onmousedown =
   window.ontouchstart = function(e){
-    if(mode <= 0
+    if(canvas_mode <= 0
       || time <= 0){
         return;
     }
@@ -174,7 +174,7 @@ window.onmousedown =
             continue;
         }
 
-        score += 1;
+        score += shapes[shape]['score'];
         randomize_shapes();
         break;
     }
