@@ -151,6 +151,14 @@ window.onload = function(){
         'white': 1,
       }
     );
+    audio_init();
+    audio_create(
+      'boop',
+      {
+        'duration': .1,
+        'volume': .1,
+      }
+    );
     canvas_init();
 };
 
@@ -173,6 +181,11 @@ window.onmousedown =
           || mouse_y >= shapes[shape]['y'] + shapes[shape]['height']){
             continue;
         }
+
+        audio_start(
+          'boop',
+          settings_settings['audio-volume']
+        );
 
         score += shapes[shape]['score'];
         randomize_shapes();
