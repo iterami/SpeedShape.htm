@@ -152,13 +152,13 @@ window.onload = function(){
       }
     );
     audio_init();
-    audio_create(
-      'boop',
-      {
+    audio_create({
+      'id': 'boop',
+      'properties': {
         'duration': .1,
         'volume': .1,
-      }
-    );
+      },
+    });
     canvas_init();
 };
 
@@ -182,10 +182,10 @@ window.onmousedown =
             continue;
         }
 
-        audio_start(
-          'boop',
-          settings_settings['audio-volume']
-        );
+        audio_start({
+          'id': 'boop',
+          'volume-multiplier': settings_settings['audio-volume'],
+        });
 
         score += shapes[shape]['score'];
         randomize_shapes();
