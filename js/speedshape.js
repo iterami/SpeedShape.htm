@@ -66,6 +66,8 @@ function randomize_shapes(){
         }while(loop_counter--);
     }
 
+    shapes_length = shapes.length;
+
     if(time <= 0){
         canvas_draw();
     }
@@ -82,6 +84,7 @@ function resize_logic(){
 
 function setmode_logic(newgame){
     shapes.length = 0;
+    shapes_length = 0;
 
     // Main menu mode.
     if(canvas_mode === 0){
@@ -114,6 +117,7 @@ var mouse_x = 0;
 var mouse_y = 0;
 var score = 0;
 var shapes = [];
+var shapes_length = 0;
 var time = 0;
 
 window.onkeydown = function(e){
@@ -175,6 +179,8 @@ window.onmousedown =
     mouse_y = e.pageY;
 
     for(var shape in shapes){
+        shape = shapes_length - shape - 1;
+
         if(mouse_x <= shapes[shape]['x']
           || mouse_x >= shapes[shape]['x'] + shapes[shape]['width']
           || mouse_y <= shapes[shape]['y']
