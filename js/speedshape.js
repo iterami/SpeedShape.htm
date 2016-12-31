@@ -144,17 +144,17 @@ window.onkeydown = function(e){
 };
 
 window.onload = function(){
-    settings_init(
-      'SpeedShape.htm-',
-      {
+    settings_init({
+      'prefix': 'SpeedShape.htm-',
+      'settings': {
         'audio-volume': 1,
         'ms-per-frame': 100,
         'red': 10,
         'restart-key': 'H',
         'time-limit': 30,
         'white': 1,
-      }
-    );
+      },
+    });
     audio_init();
     audio_create({
       'id': 'boop',
