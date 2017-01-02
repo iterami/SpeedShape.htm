@@ -104,7 +104,7 @@ function setmode_logic(newgame){
 
     // Main menu mode.
     if(canvas_mode === 0){
-        document.body.innerHTML = '<div><div><a onclick="canvas_setmode(1, true)">Start New Game</a></div></div>'
+        document.body.innerHTML = '<div><div><a onclick=canvas_setmode({mode:1,newgame:true})>Start New Game</a></div></div>'
           + '<div class=right><div><input disabled value=ESC>Main Menu<br>'
           + '<input id=restart-key maxlength=1>Restart</div><hr>'
           + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
@@ -145,17 +145,15 @@ window.onkeydown = function(e){
 
     // settings_settings['restart-key']: restart the current game.
     if(String.fromCharCode(key) === settings_settings['restart-key']){
-        canvas_setmode(
-          1,
-          false
-        );
+        canvas_setmode({
+          'mode': 1,
+        });
 
     // ESC: return to main menu.
     }else if(key === 27){
-        canvas_setmode(
-          0,
-          false
-        );
+        canvas_setmode({
+          'mode': 0,
+        });
     }
 };
 
