@@ -136,27 +136,6 @@ var shapes = [];
 var shapes_length = 0;
 var time = 0;
 
-window.onkeydown = function(e){
-    if(canvas_mode <= 0){
-        return;
-    }
-
-    var key = e.keyCode || e.which;
-
-    // settings_settings['restart-key']: restart the current game.
-    if(String.fromCharCode(key) === settings_settings['restart-key']){
-        canvas_setmode({
-          'mode': 1,
-        });
-
-    // ESC: return to main menu.
-    }else if(key === 27){
-        canvas_setmode({
-          'mode': 0,
-        });
-    }
-};
-
 window.onload = function(){
     settings_init({
       'prefix': 'SpeedShape.htm-',
@@ -178,37 +157,58 @@ window.onload = function(){
       },
     });
     canvas_init();
-};
 
-window.onmousedown =
-  window.ontouchstart = function(e){
-    if(canvas_mode <= 0
-      || time <= 0){
-        return;
-    }
-
-    e.preventDefault();
-
-    mouse_x = e.pageX;
-    mouse_y = e.pageY;
-
-    for(var shape in shapes){
-        shape = shapes_length - shape - 1;
-
-        if(mouse_x <= shapes[shape]['x']
-          || mouse_x >= shapes[shape]['x'] + shapes[shape]['width']
-          || mouse_y <= shapes[shape]['y']
-          || mouse_y >= shapes[shape]['y'] + shapes[shape]['height']){
-            continue;
+    window.onkeydown = function(e){
+        if(canvas_mode <= 0){
+            return;
         }
 
-        audio_start({
-          'id': 'boop',
-          'volume-multiplier': settings_settings['audio-volume'],
-        });
+        var key = e.keyCode || e.which;
 
-        score += shapes[shape]['score'];
-        randomize_shapes();
-        break;
-    }
+        // settings_settings['restart-key']: restart the current game.
+        if(String.fromCharCode(key) === settings_settings['restart-key']){
+            canvas_setmode({
+              'mode': 1,
+            });
+
+        // ESC: return to main menu.
+        }else if(key === 27){
+            canvas_setmode({
+              'mode': 0,
+            });
+        }
+    };
+
+    window.onmousedown =
+      window.ontouchstart = function(e){
+        if(canvas_mode <= 0
+          || time <= 0){
+            return;
+        }
+
+        e.preventDefault();
+
+        mouse_x = e.pageX;
+        mouse_y = e.pageY;
+
+        for(var shape in shapes){
+            shape = shapes_length - shape - 1;
+
+            if(mouse_x <= shapes[shape]['x']
+              || mouse_x >= shapes[shape]['x'] + shapes[shape]['width']
+              || mouse_y <= shapes[shape]['y']
+              || mouse_y >= shapes[shape]['y'] + shapes[shape]['height']){
+                continue;
+            }
+
+            audio_start({
+              'id': 'boop',
+              'volume-multiplier': settings_settings['audio-volume'],
+            });
+
+            score += shapes[shape]['score'];
+            randomize_shapes();
+            break;
+        }
+    };
 };
