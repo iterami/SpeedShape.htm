@@ -15,7 +15,7 @@ function draw_logic(){
     // Draw time remaining.
     canvas_buffer.fillStyle = '#fff';
     canvas_buffer.fillText(
-      'Time: ' + time + '/' + settings_settings['time-limit'],
+      'Time: ' + time + '/' + storage_data['time-limit'],
       5,
       25
     );
@@ -39,8 +39,8 @@ function logic(){
 function randomize_shapes(){
     shapes.length = 0;
 
-    if(settings_settings['red'] > 0){
-        var loop_counter = settings_settings['red'] - 1;
+    if(storage_data['red'] > 0){
+        var loop_counter = storage_data['red'] - 1;
         do{
             shapes.push({
               'color': '#f00',
@@ -60,8 +60,8 @@ function randomize_shapes(){
             });
         }while(loop_counter--);
     }
-    if(settings_settings['white'] > 0){
-        var loop_counter = settings_settings['white'] - 1;
+    if(storage_data['white'] > 0){
+        var loop_counter = storage_data['white'] - 1;
         do{
             shapes.push({
               'color': '#fff',
@@ -112,20 +112,20 @@ function setmode_logic(newgame){
           + '<input id=red>Red<br>'
           + '<input id=time-limit>Time Limit<br>'
           + '<input id=white>White<br>'
-          + '<a onclick=settings_reset()>Reset Settings</a></div></div>';
-        settings_update();
+          + '<a onclick=storage_reset()>Reset Settings</a></div></div>';
+        storage_update();
 
     // New game mode.
     }else{
         if(newgame){
-            settings_save();
+            storage_save();
 
         }else{
             randomize_shapes();
         }
 
         score = 0;
-        time = settings_settings['time-limit'];
+        time = storage_data['time-limit'];
     }
 }
 
@@ -137,9 +137,8 @@ var shapes_length = 0;
 var time = 0;
 
 window.onload = function(){
-    settings_init({
-      'prefix': 'SpeedShape.htm-',
-      'settings': {
+    storage_init({
+      'data': {
         'audio-volume': 1,
         'ms-per-frame': 100,
         'red': 10,
@@ -147,6 +146,7 @@ window.onload = function(){
         'time-limit': 30,
         'white': 1,
       },
+      'prefix': 'SpeedShape.htm-',
     });
     audio_init();
     audio_create({
@@ -165,8 +165,8 @@ window.onload = function(){
 
         var key = e.keyCode || e.which;
 
-        // settings_settings['restart-key']: restart the current game.
-        if(String.fromCharCode(key) === settings_settings['restart-key']){
+        // storage_data['restart-key']: restart the current game.
+        if(String.fromCharCode(key) === storage_data['restart-key']){
             canvas_setmode({
               'mode': 1,
             });
@@ -203,7 +203,7 @@ window.onload = function(){
 
             audio_start({
               'id': 'boop',
-              'volume-multiplier': settings_settings['audio-volume'],
+              'volume-multiplier': storage_data['audio-volume'],
             });
 
             score += shapes[shape]['score'];
