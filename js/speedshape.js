@@ -15,7 +15,7 @@ function draw_logic(){
     // Draw time remaining.
     canvas_buffer.fillStyle = '#fff';
     canvas_buffer.fillText(
-      'Time: ' + time + '/' + storage_data['time-limit'],
+      'Time: ' + time_display + '/' + storage_data['time-limit'],
       5,
       25
     );
@@ -29,7 +29,8 @@ function draw_logic(){
 }
 
 function logic(){
-    time = (time - .1).toFixed(1);
+    time = time - .025;
+    time_display = time.toFixed(1);
 
     if(time <= 0){
         window.clearInterval(canvas_interval);
@@ -135,6 +136,7 @@ var score = 0;
 var shapes = [];
 var shapes_length = 0;
 var time = 0;
+var time_display = '';
 
 window.onload = function(){
     storage_init({
