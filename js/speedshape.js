@@ -175,9 +175,7 @@ window.onload = function(){
 
         // ESC: return to main menu.
         }else if(key === 27){
-            canvas_setmode({
-              'mode': 0,
-            });
+            canvas_setmode();
         }
     };
 
