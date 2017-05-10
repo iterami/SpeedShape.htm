@@ -45,17 +45,17 @@ function randomize_shapes(){
         do{
             shapes.push({
               'color': '#f00',
-              'height': random_integer({
+              'height': core_random_integer({
                 'max': 200,
               }) + 42,
               'score': -1,
-              'width': random_integer({
+              'width': core_random_integer({
                 'max': 200,
               }) + 42,
-              'x': random_integer({
+              'x': core_random_integer({
                 'max': canvas_width,
               }) - 21,
-              'y': random_integer({
+              'y': core_random_integer({
                 'max': canvas_height,
               }) - 21,
             });
@@ -66,17 +66,17 @@ function randomize_shapes(){
         do{
             shapes.push({
               'color': '#fff',
-              'height': random_integer({
+              'height': core_random_integer({
                 'max': 99,
               }) + 20,
               'score': 1,
-              'width': random_integer({
+              'width': core_random_integer({
                 'max': 99,
               }) + 20,
-              'x': random_integer({
+              'x': core_random_integer({
                 'max': canvas_width,
               }) - 9,
-              'y': random_integer({
+              'y': core_random_integer({
                 'max': canvas_height,
               }) - 9,
             });
