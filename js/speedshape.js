@@ -15,7 +15,7 @@ function draw_logic(){
     // Draw time remaining.
     canvas_buffer.fillStyle = '#fff';
     canvas_buffer.fillText(
-      'Time: ' + time_display + '/' + storage_data['time-limit'],
+      'Time: ' + time_display + '/' + core_storage_data['time-limit'],
       5,
       25
     );
@@ -40,8 +40,8 @@ function logic(){
 function randomize_shapes(){
     shapes.length = 0;
 
-    if(storage_data['red'] > 0){
-        var loop_counter = storage_data['red'] - 1;
+    if(core_storage_data['red'] > 0){
+        var loop_counter = core_storage_data['red'] - 1;
         do{
             shapes.push({
               'color': '#f00',
@@ -61,8 +61,8 @@ function randomize_shapes(){
             });
         }while(loop_counter--);
     }
-    if(storage_data['white'] > 0){
-        var loop_counter = storage_data['white'] - 1;
+    if(core_storage_data['white'] > 0){
+        var loop_counter = core_storage_data['white'] - 1;
         do{
             shapes.push({
               'color': '#fff',
@@ -113,20 +113,20 @@ function setmode_logic(newgame){
           + '<input id=red>Red<br>'
           + '<input id=time-limit>Time Limit<br>'
           + '<input id=white>White<br>'
-          + '<a onclick=storage_reset()>Reset Settings</a></div></div>';
-        storage_update();
+          + '<a onclick=core_storage_reset()>Reset Settings</a></div></div>';
+        core_storage_update();
 
     // New game mode.
     }else{
         if(newgame){
-            storage_save();
+            core_storage_save();
 
         }else{
             randomize_shapes();
         }
 
         score = 0;
-        time = storage_data['time-limit'];
+        time = core_storage_data['time-limit'];
     }
 }
 
@@ -139,7 +139,7 @@ var time = 0;
 var time_display = '';
 
 window.onload = function(){
-    storage_init({
+    core_storage_init({
       'data': {
         'audio-volume': 1,
         'ms-per-frame': 100,
@@ -167,8 +167,8 @@ window.onload = function(){
 
         var key = e.keyCode || e.which;
 
-        // storage_data['restart-key']: restart the current game.
-        if(String.fromCharCode(key) === storage_data['restart-key']){
+        // core_storage_data['restart-key']: restart the current game.
+        if(String.fromCharCode(key) === core_storage_data['restart-key']){
             canvas_setmode({
               'mode': 1,
             });
@@ -203,7 +203,7 @@ window.onload = function(){
 
             audio_start({
               'id': 'boop',
-              'volume-multiplier': storage_data['audio-volume'],
+              'volume-multiplier': core_storage_data['audio-volume'],
             });
 
             score += shapes[shape]['score'];
