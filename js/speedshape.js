@@ -90,55 +90,7 @@ function randomize_shapes(){
     }
 }
 
-function resize_logic(){
-    if(time > 0){
-        randomize_shapes();
-
-    }else{
-        canvas_draw();
-    }
-}
-
-function setmode_logic(newgame){
-    shapes.length = 0;
-    shapes_length = 0;
-
-    // Main menu mode.
-    if(canvas_mode === 0){
-        document.body.innerHTML = '<div><div><a onclick=canvas_setmode({mode:1,newgame:true})>Start New Game</a></div></div>'
-          + '<div class=right><div><input disabled value=ESC>Main Menu<br>'
-          + '<input id=restart-key maxlength=1>Restart</div><hr>'
-          + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
-          + '<input id=ms-per-frame>ms/Frame<br>'
-          + '<input id=red>Red<br>'
-          + '<input id=time-limit>Time Limit<br>'
-          + '<input id=white>White<br>'
-          + '<a onclick=core_storage_reset()>Reset Settings</a></div></div>';
-        core_storage_update();
-
-    // New game mode.
-    }else{
-        if(newgame){
-            core_storage_save();
-
-        }else{
-            randomize_shapes();
-        }
-
-        score = 0;
-        time = core_storage_data['time-limit'];
-    }
-}
-
-var mouse_x = 0;
-var mouse_y = 0;
-var score = 0;
-var shapes = [];
-var shapes_length = 0;
-var time = 0;
-var time_display = '';
-
-window.onload = function(){
+function repo_init(){
     core_storage_init({
       'data': {
         'audio-volume': 1,
@@ -211,4 +163,52 @@ window.onload = function(){
             break;
         }
     };
-};
+}
+
+function resize_logic(){
+    if(time > 0){
+        randomize_shapes();
+
+    }else{
+        canvas_draw();
+    }
+}
+
+function setmode_logic(newgame){
+    shapes.length = 0;
+    shapes_length = 0;
+
+    // Main menu mode.
+    if(canvas_mode === 0){
+        document.body.innerHTML = '<div><div><a onclick=canvas_setmode({mode:1,newgame:true})>Start New Game</a></div></div>'
+          + '<div class=right><div><input disabled value=ESC>Main Menu<br>'
+          + '<input id=restart-key maxlength=1>Restart</div><hr>'
+          + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
+          + '<input id=ms-per-frame>ms/Frame<br>'
+          + '<input id=red>Red<br>'
+          + '<input id=time-limit>Time Limit<br>'
+          + '<input id=white>White<br>'
+          + '<a onclick=core_storage_reset()>Reset Settings</a></div></div>';
+        core_storage_update();
+
+    // New game mode.
+    }else{
+        if(newgame){
+            core_storage_save();
+
+        }else{
+            randomize_shapes();
+        }
+
+        score = 0;
+        time = core_storage_data['time-limit'];
+    }
+}
+
+var mouse_x = 0;
+var mouse_y = 0;
+var score = 0;
+var shapes = [];
+var shapes_length = 0;
+var time = 0;
+var time_display = '';
