@@ -91,8 +91,8 @@ function randomize_shapes(){
 }
 
 function repo_init(){
-    core_storage_init({
-      'data': {
+    core_repo_init({
+      'storage': {
         'audio-volume': 1,
         'ms-per-frame': 100,
         'red': 10,
@@ -100,7 +100,7 @@ function repo_init(){
         'time-limit': 30,
         'white': 1,
       },
-      'prefix': 'SpeedShape.htm-',
+      'title': 'SpeedShape.htm',
     });
     audio_init();
     audio_create({
