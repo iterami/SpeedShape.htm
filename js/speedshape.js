@@ -92,11 +92,54 @@ function randomize_shapes(){
 
 function repo_init(){
     core_repo_init({
+      'keybinds': {
+        72: {
+          'todo': function(){
+              canvas_setmode({
+                'mode': 1,
+              });
+          },
+        },
+        81: {
+          'todo': canvas_menu_quit,
+        },
+      },
+      'mousebinds': {
+        'mousedown': {
+          'preventDefault': true,
+          'todo': function(event){
+              if(core_menu_open
+                || canvas_mode <= 0
+                || time <= 0){
+                  return;
+              }
+
+              for(var shape in shapes){
+                  shape = shapes_length - shape - 1;
+
+                  if(core_mouse['x'] <= shapes[shape]['x']
+                    || core_mouse['x'] >= shapes[shape]['x'] + shapes[shape]['width']
+                    || core_mouse['y'] <= shapes[shape]['y']
+                    || core_mouse['y'] >= shapes[shape]['y'] + shapes[shape]['height']){
+                      continue;
+                  }
+
+                  audio_start({
+                    'id': 'boop',
+                    'volume-multiplier': core_storage_data['audio-volume'],
+                  });
+
+                  score += shapes[shape]['score'];
+                  randomize_shapes();
+                  break;
+              }
+          },
+        },
+      },
       'storage': {
         'audio-volume': 1,
         'ms-per-frame': 100,
         'red': 10,
-        'restart-key': 'H',
         'time-limit': 30,
         'white': 1,
       },
@@ -111,58 +154,6 @@ function repo_init(){
       },
     });
     canvas_init();
-
-    window.onkeydown = function(e){
-        if(canvas_mode <= 0){
-            return;
-        }
-
-        var key = e.keyCode || e.which;
-
-        // core_storage_data['restart-key']: restart the current game.
-        if(String.fromCharCode(key) === core_storage_data['restart-key']){
-            canvas_setmode({
-              'mode': 1,
-            });
-
-        // ESC: return to main menu.
-        }else if(key === 27){
-            canvas_setmode();
-        }
-    };
-
-    window.onmousedown =
-      window.ontouchstart = function(e){
-        if(canvas_mode <= 0
-          || time <= 0){
-            return;
-        }
-
-        e.preventDefault();
-
-        mouse_x = e.pageX;
-        mouse_y = e.pageY;
-
-        for(var shape in shapes){
-            shape = shapes_length - shape - 1;
-
-            if(mouse_x <= shapes[shape]['x']
-              || mouse_x >= shapes[shape]['x'] + shapes[shape]['width']
-              || mouse_y <= shapes[shape]['y']
-              || mouse_y >= shapes[shape]['y'] + shapes[shape]['height']){
-                continue;
-            }
-
-            audio_start({
-              'id': 'boop',
-              'volume-multiplier': core_storage_data['audio-volume'],
-            });
-
-            score += shapes[shape]['score'];
-            randomize_shapes();
-            break;
-        }
-    };
 }
 
 function resize_logic(){
@@ -181,8 +172,7 @@ function setmode_logic(newgame){
     // Main menu mode.
     if(canvas_mode === 0){
         document.getElementById('wrap').innerHTML = '<div><div><a onclick=canvas_setmode({mode:1,newgame:true})>Start New Game</a></div></div>'
-          + '<div class=right><div><input disabled value=ESC>Main Menu<br>'
-          + '<input id=restart-key maxlength=1>Restart</div><hr>'
+          + '<div class=right><div><input disabled value=ESC>Main Menu</div><hr>'
           + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
           + '<input id=ms-per-frame>ms/Frame<br>'
           + '<input id=red>Red<br>'
