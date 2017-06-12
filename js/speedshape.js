@@ -92,6 +92,7 @@ function randomize_shapes(){
 
 function repo_init(){
     core_repo_init({
+      'info': '<a onclick=canvas_setmode({mode:1,newgame:true})>Start New Game</a>',
       'keybinds': {
         72: {
           'todo': function(){
@@ -100,10 +101,8 @@ function repo_init(){
               });
           },
         },
-        81: {
-          'todo': canvas_menu_quit,
-        },
       },
+      'menu': true,
       'mousebinds': {
         'mousedown': {
           'preventDefault': true,
@@ -143,6 +142,7 @@ function repo_init(){
         'time-limit': 30,
         'white': 1,
       },
+      'storage-menu': '<input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br><input id=ms-per-frame>ms/Frame<br><input id=red>Red<br><input id=time-limit>Time Limit<br><input id=white>White',
       'title': 'SpeedShape.htm',
     });
     audio_init();
@@ -165,38 +165,6 @@ function resize_logic(){
     }
 }
 
-function setmode_logic(newgame){
-    shapes.length = 0;
-    shapes_length = 0;
-
-    // Main menu mode.
-    if(canvas_mode === 0){
-        document.getElementById('wrap').innerHTML = '<div><div><a onclick=canvas_setmode({mode:1,newgame:true})>Start New Game</a></div></div>'
-          + '<div class=right><div><input disabled value=ESC>Main Menu</div><hr>'
-          + '<div><input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br>'
-          + '<input id=ms-per-frame>ms/Frame<br>'
-          + '<input id=red>Red<br>'
-          + '<input id=time-limit>Time Limit<br>'
-          + '<input id=white>White<br>'
-          + '<a onclick=core_storage_reset()>Reset Settings</a></div></div>';
-        core_storage_update();
-
-    // New game mode.
-    }else{
-        if(newgame){
-            core_storage_save();
-
-        }else{
-            randomize_shapes();
-        }
-
-        score = 0;
-        time = core_storage_data['time-limit'];
-    }
-}
-
-var mouse_x = 0;
-var mouse_y = 0;
 var score = 0;
 var shapes = [];
 var shapes_length = 0;
