@@ -107,8 +107,7 @@ function repo_init(){
         'mousedown': {
           'preventDefault': true,
           'todo': function(event){
-              if(core_menu_open
-                || canvas_mode <= 0
+              if(canvas_mode <= 0
                 || time <= 0){
                   return;
               }
