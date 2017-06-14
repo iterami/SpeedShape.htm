@@ -92,7 +92,7 @@ function randomize_shapes(){
 
 function repo_init(){
     core_repo_init({
-      'info': '<a onclick=canvas_setmode({mode:1,newgame:true})>Start New Game</a>',
+      'info': '<input onclick=canvas_setmode({mode:1,newgame:true}) type=button value="Start New Game">',
       'keybinds': {
         72: {
           'todo': function(){
