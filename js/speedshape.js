@@ -122,9 +122,8 @@ function repo_init(){
                       continue;
                   }
 
-                  audio_start({
+                  core_audio_start({
                     'id': 'boop',
-                    'volume-multiplier': core_storage_data['audio-volume'],
                   });
 
                   score += shapes[shape]['score'];
@@ -135,21 +134,18 @@ function repo_init(){
         },
       },
       'storage': {
-        'audio-volume': 1,
         'ms-per-frame': 100,
         'red': 10,
         'time-limit': 30,
         'white': 1,
       },
-      'storage-menu': '<input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br><input id=ms-per-frame>ms/Frame<br><input id=red>Red<br><input id=time-limit>Time Limit<br><input id=white>White',
+      'storage-menu': '<input id=ms-per-frame>ms/Frame<br><input id=red>Red<br><input id=time-limit>Time Limit<br><input id=white>White',
       'title': 'SpeedShape.htm',
     });
-    audio_init();
-    audio_create({
+    core_audio_create({
       'id': 'boop',
       'properties': {
         'duration': .1,
-        'volume': .1,
       },
     });
     canvas_init();
