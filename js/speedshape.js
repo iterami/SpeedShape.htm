@@ -139,7 +139,7 @@ function repo_init(){
         'time-limit': 30,
         'white': 1,
       },
-      'storage-menu': '<input id=ms-per-frame>ms/Frame<br><input id=red>Red<br><input id=time-limit>Time Limit<br><input id=white>White',
+      'storage-menu': '<table><tr><td><input id=ms-per-frame><td>ms/Frame<tr><td><input id=red><td>Red<tr><td><input id=time-limit><td>Time Limit<tr><td><input id=white><td>White</table>',
       'title': 'SpeedShape.htm',
     });
     core_audio_create({
