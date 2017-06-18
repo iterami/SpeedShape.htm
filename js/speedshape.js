@@ -92,6 +92,11 @@ function randomize_shapes(){
 
 function repo_init(){
     core_repo_init({
+      'audios': {
+        'boop': {
+          'duration': .1,
+        },
+      },
       'info': '<input onclick=canvas_setmode({mode:1,newgame:true}) type=button value="Start New Game">',
       'keybinds': {
         72: {
@@ -141,12 +146,6 @@ function repo_init(){
       },
       'storage-menu': '<table><tr><td><input id=ms-per-frame><td>ms/Frame<tr><td><input id=red><td>Red<tr><td><input id=time-limit><td>Time Limit<tr><td><input id=white><td>White</table>',
       'title': 'SpeedShape.htm',
-    });
-    core_audio_create({
-      'id': 'boop',
-      'properties': {
-        'duration': .1,
-      },
     });
     canvas_init();
 }
