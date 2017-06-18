@@ -97,14 +97,10 @@ function repo_init(){
           'duration': .1,
         },
       },
-      'info': '<input onclick=canvas_setmode({mode:1,newgame:true}) type=button value="Start New Game">',
+      'info': '<input onclick=canvas_setmode({newgame:true}) type=button value="Start New Game">',
       'keybinds': {
         72: {
-          'todo': function(){
-              canvas_setmode({
-                'mode': 1,
-              });
-          },
+          'todo': canvas_setmode,
         },
       },
       'menu': true,
@@ -112,8 +108,7 @@ function repo_init(){
         'mousedown': {
           'preventDefault': true,
           'todo': function(event){
-              if(canvas_mode <= 0
-                || time <= 0){
+              if(time <= 0){
                   return;
               }
 
