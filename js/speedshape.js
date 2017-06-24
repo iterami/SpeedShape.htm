@@ -11,21 +11,6 @@ function draw_logic(){
           shapes[shape]['height']
         );
     }
-
-    // Draw time remaining.
-    canvas_buffer.fillStyle = '#fff';
-    canvas_buffer.fillText(
-      'Time: ' + time_display + '/' + core_storage_data['time-limit'],
-      5,
-      25
-    );
-
-    // Draw score.
-    canvas_buffer.fillText(
-      'Score: ' + score,
-      5,
-      55
-    );
 }
 
 function logic(){
@@ -35,6 +20,13 @@ function logic(){
     if(time <= 0){
         window.clearInterval(canvas_interval);
     }
+
+    core_ui_update({
+      'ids': {
+        'score': score,
+        'time': time_display + '/' + core_storage_data['time-limit'],
+      },
+    });
 }
 
 function randomize_shapes(){
@@ -141,6 +133,7 @@ function repo_init(){
       },
       'storage-menu': '<table><tr><td><input id=ms-per-frame><td>ms/Frame<tr><td><input id=red><td>Red<tr><td><input id=time-limit><td>Time Limit<tr><td><input id=white><td>White</table>',
       'title': 'SpeedShape.htm',
+      'ui': '<input id=ui-score>Score<br><input id=ui-time>Time',
     });
     canvas_init();
 }
