@@ -36,7 +36,7 @@ function randomize_shapes(){
         var loop_counter = core_storage_data['red'] - 1;
         do{
             shapes.push({
-              'color': '#f00',
+              'color': core_storage_data['color-negative'],
               'height': core_random_integer({
                 'max': 200,
               }) + 42,
@@ -57,7 +57,7 @@ function randomize_shapes(){
         var loop_counter = core_storage_data['white'] - 1;
         do{
             shapes.push({
-              'color': '#fff',
+              'color': core_storage_data['color-positive'],
               'height': core_random_integer({
                 'max': 99,
               }) + 20,
