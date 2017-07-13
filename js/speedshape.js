@@ -30,7 +30,7 @@ function logic(){
 }
 
 function randomize_shapes(){
-    core_entities = {};
+    core_entity_remove_all();
 
     if(core_storage_data['negative'] > 0){
         var loop_counter = core_storage_data['negative'] - 1;
