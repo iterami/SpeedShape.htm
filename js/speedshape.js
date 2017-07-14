@@ -149,15 +149,6 @@ function repo_init(){
     canvas_init();
 }
 
-function resize_logic(){
-    if(time > 0){
-        randomize_shapes();
-
-    }else{
-        canvas_draw();
-    }
-}
-
 var score = 0;
 var time = 0;
 var time_display = '';
