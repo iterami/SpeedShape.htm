@@ -144,7 +144,7 @@ function repo_init(){
       },
       'storage-menu': '<table><tr><td><input id=ms-per-frame><td>ms/Frame<tr><td><input id=negative><td># of Negative<tr><td><input id=time-limit><td>Time Limit<tr><td><input id=positive><td># of Positive</table>',
       'title': 'SpeedShape.htm',
-      'ui': '<input id=ui-score>Score<br><input id=ui-time>Time',
+      'ui': 'Score: <span id=ui-score></span><br>Time: <span id=ui-time></span>',
     });
     canvas_init();
 }
