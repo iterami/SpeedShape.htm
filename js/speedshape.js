@@ -116,10 +116,9 @@ function repo_init(){
                       continue;
                   }
 
-                  if(dscore <= 0){
-                      dscore = core_entities[entity]['score'];
+                  dscore = core_entities[entity]['score'];
 
-                  }else{
+                  if(dscore > 0){
                       break;
                   }
               }
