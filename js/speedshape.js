@@ -2,15 +2,20 @@
 
 function draw_logic(){
     // Draw shapes.
-    for(var entity in core_entities){
-        canvas_buffer.fillStyle = core_entities[entity]['color'];
-        canvas_buffer.fillRect(
-          core_entities[entity]['x'],
-          core_entities[entity]['y'],
-          core_entities[entity]['width'],
-          core_entities[entity]['height']
-        );
-    }
+    core_group_modify({
+      'groups': [
+        'canvas',
+      ],
+      'todo': function(entity){
+          canvas_buffer.fillStyle = core_entities[entity]['color'];
+          canvas_buffer.fillRect(
+            core_entities[entity]['x'],
+            core_entities[entity]['y'],
+            core_entities[entity]['width'],
+            core_entities[entity]['height']
+          );
+      },
+    });
 }
 
 function logic(){
@@ -53,20 +58,23 @@ function repo_init(){
 
               var dscore = 0;
 
-              for(var entity in core_entities){
-                  if(core_mouse['x'] <= core_entities[entity]['x']
-                    || core_mouse['x'] >= core_entities[entity]['x'] + core_entities[entity]['width']
-                    || core_mouse['y'] <= core_entities[entity]['y']
-                    || core_mouse['y'] >= core_entities[entity]['y'] + core_entities[entity]['height']){
-                      continue;
-                  }
+              core_group_modify({
+                'groups': [
+                  'canvas',
+                ],
+                'todo': function(entity){
+                    if(core_mouse['x'] <= core_entities[entity]['x']
+                      || core_mouse['x'] >= core_entities[entity]['x'] + core_entities[entity]['width']
+                      || core_mouse['y'] <= core_entities[entity]['y']
+                      || core_mouse['y'] >= core_entities[entity]['y'] + core_entities[entity]['height']){
+                        return;
+                    }
 
-                  dscore = core_entities[entity]['score'];
-
-                  if(dscore > 0){
-                      break;
-                  }
-              }
+                    if(dscore <= 0){
+                        dscore = core_entities[entity]['score'];
+                    }
+                },
+              });
 
               if(dscore !== 0){
                   score += dscore;
