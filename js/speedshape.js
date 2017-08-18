@@ -45,7 +45,17 @@ function repo_init(){
           'duration': .1,
         },
       },
-      'info': '<input onclick=canvas_setmode({newgame:true}) type=button value="Start New Game">',
+      'info': '<input id=start type=button value="Start New Game">',
+      'info-events': {
+        'start': {
+          'todo': function(){
+              canvas_setmode({
+                'newgame': true,
+              });
+          },
+          'type': 'onclick',
+        },
+      },
       'keybinds': {
         72: {
           'todo': canvas_setmode,
