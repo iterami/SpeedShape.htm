@@ -23,10 +23,10 @@ function randomize_shapes(){
                   'max': 200,
                 }) + 42,
                 'x': core_random_integer({
-                  'max': canvas_width,
+                  'max': canvas_properties['width'],
                 }) - 21,
                 'y': core_random_integer({
-                  'max': canvas_height,
+                  'max': canvas_properties['height'],
                 }) - 21,
               },
             });
@@ -46,10 +46,10 @@ function randomize_shapes(){
                   'max': 99,
                 }) + 20,
                 'x': core_random_integer({
-                  'max': canvas_width,
+                  'max': canvas_properties['width'],
                 }) - 9,
                 'y': core_random_integer({
-                  'max': canvas_height,
+                  'max': canvas_properties['height'],
                 }) - 9,
               },
             });
