@@ -113,7 +113,3 @@ function repo_init(){
     });
     canvas_init();
 }
-
-var score = 0;
-var time = 0;
-var time_display = '';

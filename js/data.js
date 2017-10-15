@@ -60,3 +60,7 @@ function randomize_shapes(){
         canvas_draw();
     }
 }
+
+var score = 0;
+var time = 0;
+var time_display = '';
