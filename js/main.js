@@ -45,21 +45,21 @@ function repo_init(){
           'duration': .1,
         },
       },
-      'globals': {
-        'score': 0,
-        'time': 0,
-        'time_display': .1,
-      },
-      'info': '<input id=start type=button value="Start New Game">',
-      'info-events': {
+      'events': {
         'start': {
-          'todo': function(){
+          'onclick': function(){
               canvas_setmode({
                 'newgame': true,
               });
           },
         },
       },
+      'globals': {
+        'score': 0,
+        'time': 0,
+        'time_display': .1,
+      },
+      'info': '<input id=start type=button value="Start New Game">',
       'keybinds': {
         72: {
           'todo': canvas_setmode,
