@@ -23,12 +23,13 @@ function draw_logic(){
 }
 
 function logic(){
+    if(time <= 0){
+        core_interval_pause_all();
+        return;
+    }
+
     time = time - .025;
     time_display = time.toFixed(1);
-
-    if(time <= 0){
-        window.clearInterval(canvas_interval);
-    }
 
     core_ui_update({
       'ids': {
@@ -107,12 +108,11 @@ function repo_init(){
         },
       },
       'storage': {
-        'ms-per-frame': 100,
         'negative': 10,
         'positive': 1,
         'time-limit': 30,
       },
-      'storage-menu': '<table><tr><td><input id=ms-per-frame><td>ms/Frame<tr><td><input id=negative><td># of Negative<tr><td><input id=time-limit><td>Time Limit<tr><td><input id=positive><td># of Positive</table>',
+      'storage-menu': '<table><tr><td><input id=negative><td># of Negative<tr><td><input id=time-limit><td>Time Limit<tr><td><input id=positive><td># of Positive</table>',
       'title': 'SpeedShape.htm',
       'ui': 'Score: <span id=ui-score></span><br>Time: <span id=ui-time></span>',
     });
