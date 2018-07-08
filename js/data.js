@@ -10,7 +10,7 @@ function randomize_shapes(){
     core_entity_remove_all();
 
     if(core_storage_data['negative'] > 0){
-        var loop_counter = core_storage_data['negative'] - 1;
+        let loop_counter = core_storage_data['negative'] - 1;
         do{
             core_entity_create({
               'properties': {
@@ -33,7 +33,7 @@ function randomize_shapes(){
         }while(loop_counter--);
     }
     if(core_storage_data['positive'] > 0){
-        var loop_counter = core_storage_data['positive'] - 1;
+        let loop_counter = core_storage_data['positive'] - 1;
         do{
             core_entity_create({
               'properties': {

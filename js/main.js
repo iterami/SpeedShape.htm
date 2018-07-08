@@ -75,7 +75,7 @@ function repo_init(){
                   return;
               }
 
-              var dscore = 0;
+              let dscore = 0;
 
               core_group_modify({
                 'groups': [
