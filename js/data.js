@@ -13,6 +13,7 @@ function randomize_shapes(){
         let loop_counter = core_storage_data['negative'] - 1;
         do{
             core_entity_create({
+              'id': 'negative-' + loop_counter,
               'properties': {
                 'color': core_storage_data['color-negative'],
                 'height': core_random_integer({
@@ -36,6 +37,7 @@ function randomize_shapes(){
         let loop_counter = core_storage_data['positive'] - 1;
         do{
             core_entity_create({
+              'id': 'positive-' + loop_counter,
               'properties': {
                 'color': core_storage_data['color-positive'],
                 'height': core_random_integer({
