@@ -108,11 +108,15 @@ function repo_init(){
         },
       },
       'storage': {
-        'negative': 10,
-        'positive': 1,
+        'negative-count': 10,
+        'negative-size-bonus': 42,
+        'negative-size-max': 200,
+        'positive-count': 1,
+        'positive-size-bonus': 20,
+        'positive-size-max': 99,
         'time-limit': 30,
       },
-      'storage-menu': '<table><tr><td><input id=negative><td># of Negative<tr><td><input id=time-limit><td>Time Limit<tr><td><input id=positive><td># of Positive</table>',
+      'storage-menu': '<table><tr><td><input id=negative-count><td># of Negative<tr><td><input id=negative-size-bonus><td>Negative Size Bonus<tr><td><input id=negative-size-max><td>Negative Size Max<tr><td><input id=positive-count><td># of Positive<tr><td><input id=positive-size-bonus><td>Positive Size Bonus<tr><td><input id=positive-size-max><td>Positive Size Max<tr><td><input id=time-limit><td>Time Limit</table>',
       'title': 'SpeedShape.htm',
       'ui': 'Score: <span id=score></span><br>Time: <span id=time></span>',
     });
