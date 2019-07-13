@@ -44,11 +44,6 @@ function logic(){
 
 function repo_init(){
     core_repo_init({
-      'audios': {
-        'boop': {
-          'duration': .1,
-        },
-      },
       'events': {
         'start': {
           'onclick': function(){
@@ -101,7 +96,7 @@ function repo_init(){
               if(dscore !== 0){
                   score += dscore;
 
-                  core_audio_start({
+                  audio_start({
                     'id': 'boop',
                   });
 
@@ -128,6 +123,13 @@ function repo_init(){
         + '<tr><td><input id=time-limit><td>Time Limit</table>',
       'title': 'SpeedShape.htm',
       'ui': 'Score: <span id=score></span><br>Time: <span id=time></span>',
+    });
+    audio_create({
+      'audios': {
+        'boop': {
+          'duration': .1,
+        },
+      },
     });
     canvas_init();
 }
