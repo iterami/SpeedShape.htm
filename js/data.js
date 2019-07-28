@@ -7,12 +7,12 @@ function load_data(id){
 }
 
 function randomize_shapes(){
-    core_entity_remove_all();
+    entity_remove_all();
 
     if(core_storage_data['negative-count'] > 0){
         let loop_counter = core_storage_data['negative-count'] - 1;
         do{
-            core_entity_create({
+            entity_create({
               'id': 'negative-' + loop_counter,
               'properties': {
                 'color': core_storage_data['color-negative'],
@@ -36,7 +36,7 @@ function randomize_shapes(){
     if(core_storage_data['positive-count'] > 0){
         let loop_counter = core_storage_data['positive-count'] - 1;
         do{
-            core_entity_create({
+            entity_create({
               'id': 'positive-' + loop_counter,
               'properties': {
                 'color': core_storage_data['color-positive'],

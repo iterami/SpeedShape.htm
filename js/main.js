@@ -2,21 +2,21 @@
 
 function draw_logic(){
     // Draw shapes.
-    core_group_modify({
+    entity_group_modify({
       'groups': [
         'canvas',
       ],
       'todo': function(entity){
           canvas_setproperties({
             'properties': {
-              'fillStyle': core_entities[entity]['color'],
+              'fillStyle': entity_entities[entity]['color'],
             },
           });
           canvas_buffer.fillRect(
-            core_entities[entity]['x'],
-            core_entities[entity]['y'],
-            core_entities[entity]['width'],
-            core_entities[entity]['height']
+            entity_entities[entity]['x'],
+            entity_entities[entity]['y'],
+            entity_entities[entity]['width'],
+            entity_entities[entity]['height']
           );
       },
     });
@@ -75,20 +75,20 @@ function repo_init(){
 
               let dscore = 0;
 
-              core_group_modify({
+              entity_group_modify({
                 'groups': [
                   'canvas',
                 ],
                 'todo': function(entity){
-                    if(core_mouse['x'] <= core_entities[entity]['x']
-                      || core_mouse['x'] >= core_entities[entity]['x'] + core_entities[entity]['width']
-                      || core_mouse['y'] <= core_entities[entity]['y']
-                      || core_mouse['y'] >= core_entities[entity]['y'] + core_entities[entity]['height']){
+                    if(core_mouse['x'] <= entity_entities[entity]['x']
+                      || core_mouse['x'] >= entity_entities[entity]['x'] + entity_entities[entity]['width']
+                      || core_mouse['y'] <= entity_entities[entity]['y']
+                      || core_mouse['y'] >= entity_entities[entity]['y'] + entity_entities[entity]['height']){
                         return;
                     }
 
                     if(dscore <= 0){
-                        dscore = core_entities[entity]['score'];
+                        dscore = entity_entities[entity]['score'];
                     }
                 },
               });
