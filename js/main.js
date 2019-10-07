@@ -46,11 +46,7 @@ function repo_init(){
     core_repo_init({
       'events': {
         'start': {
-          'onclick': function(){
-              canvas_setmode({
-                'newgame': true,
-              });
-          },
+          'onclick': core_repo_reset,
         },
       },
       'globals': {
@@ -59,11 +55,6 @@ function repo_init(){
         'time_display': .1,
       },
       'info': '<input id=start type=button value="Start New Game">',
-      'keybinds': {
-        72: {
-          'todo': canvas_setmode,
-        },
-      },
       'menu': true,
       'mousebinds': {
         'mousedown': {
@@ -105,6 +96,7 @@ function repo_init(){
           },
         },
       },
+      'reset': canvas_setmode,
       'storage': {
         'negative-count': 10,
         'negative-size-bonus': 42,
