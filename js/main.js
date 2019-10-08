@@ -42,6 +42,14 @@ function logic(){
     });
 }
 
+function repo_escape(){
+    if(!entity_entities['negative-0']
+      && !entity_entities['positive-0']
+      && !core_menu_open){
+        core_repo_reset();
+    }
+}
+
 function repo_init(){
     core_repo_init({
       'events': {
