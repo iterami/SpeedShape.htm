@@ -29,9 +29,12 @@ function logic(){
     }
 
     time = time - .025;
-    time_display = core_round({
-      'decimals': 1,
-      'number': time,
+    time_display = core_number_format({
+      'decimals-min': 1,
+      'number': core_round({
+        'decimals': 1,
+        'number': time,
+      }),
     });
 
     core_ui_update({
