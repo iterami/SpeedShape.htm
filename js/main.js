@@ -1,6 +1,6 @@
 'use strict';
 
-function draw_logic(){
+function repo_drawlogic(){
     // Draw shapes.
     entity_group_modify({
       'groups': [
@@ -22,7 +22,7 @@ function draw_logic(){
     });
 }
 
-function logic(){
+function repo_logic(){
     if(time <= 0){
         core_interval_pause_all();
         return;
