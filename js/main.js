@@ -1,7 +1,6 @@
 'use strict';
 
 function repo_drawlogic(){
-    // Draw shapes.
     entity_group_modify({
       'groups': [
         'canvas',
@@ -117,13 +116,13 @@ function repo_init(){
         'positive-size-max': 99,
         'time-limit': 30,
       },
-      'storage-menu': '<table><tr><td><input id=negative-count><td># of Negative'
-        + '<tr><td><input id=negative-size-bonus><td>Negative Size Bonus'
-        + '<tr><td><input id=negative-size-max><td>Negative Size Max'
-        + '<tr><td><input id=positive-count><td># of Positive'
-        + '<tr><td><input id=positive-size-bonus><td>Positive Size Bonus'
-        + '<tr><td><input id=positive-size-max><td>Positive Size Max'
-        + '<tr><td><input id=time-limit><td>Time Limit</table>',
+      'storage-menu': '<table><tr><td><input id=negative-count min=0 type=number><td># of Negative'
+        + '<tr><td><input id=negative-size-bonus type=number><td>Negative Size Bonus'
+        + '<tr><td><input id=negative-size-max type=number><td>Negative Size Max'
+        + '<tr><td><input id=positive-count min=0 type=number><td># of Positive'
+        + '<tr><td><input id=positive-size-bonus type=number><td>Positive Size Bonus'
+        + '<tr><td><input id=positive-size-max type=number><td>Positive Size Max'
+        + '<tr><td><input id=time-limit type=number><td>Time Limit</table>',
       'title': 'SpeedShape.htm',
       'ui': 'Score: <span id=score></span><br>Time: <span id=time></span>',
     });
