@@ -133,5 +133,7 @@ function repo_init(){
         },
       },
     });
-    canvas_init();
+    canvas_init({
+      'cursor': 'pointer',
+    });
 }
