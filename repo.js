@@ -75,7 +75,7 @@ function repo_drawlogic(){
               'fillStyle': entity_entities[entity]['color'],
             },
           });
-          canvas_buffer.fillRect(
+          canvas.fillRect(
             entity_entities[entity]['x'],
             entity_entities[entity]['y'],
             entity_entities[entity]['width'],
