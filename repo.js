@@ -15,7 +15,7 @@ function randomize_shapes(){
             entity_create({
               'id': 'negative-' + loop_counter,
               'properties': {
-                'color': core_storage_data['color-negative'],
+                'color': '#663366',
                 'height': core_random_integer({
                   'max': core_storage_data['negative-size-max'],
                 }) + core_storage_data['negative-size-bonus'],
@@ -39,7 +39,7 @@ function randomize_shapes(){
             entity_create({
               'id': 'positive-' + loop_counter,
               'properties': {
-                'color': core_storage_data['color-positive'],
+                'color': '#206620',
                 'height': core_random_integer({
                   'max': core_storage_data['positive-size-max'],
                 }) + core_storage_data['positive-size-bonus'],
