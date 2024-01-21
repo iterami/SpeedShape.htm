@@ -128,7 +128,7 @@ function repo_init(){
         'time': 0,
         'time_display': .1,
       },
-      'info': '<input id=start type=button value="Start New Game">',
+      'info': '<button id=start type=button>Start New Game</button>',
       'menu': true,
       'mousebinds': {
         'mousedown': {
