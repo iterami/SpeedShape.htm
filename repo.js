@@ -161,9 +161,7 @@ function repo_init(){
               if(dscore !== 0){
                   score += dscore;
 
-                  audio_start({
-                    'id': 'boop',
-                  });
+                  audio_start('boop');
 
                   randomize_shapes();
               }
@@ -189,13 +187,6 @@ function repo_init(){
         + '<tr><td><input class=mini id=time-limit step=any type=number><td>Time Limit</table>',
       'title': 'SpeedShape.htm',
       'ui': 'Score: <span id=score></span><br>Time: <span id=time></span>',
-    });
-    audio_create({
-      'audios': {
-        'boop': {
-          'duration': .1,
-        },
-      },
     });
     canvas_init({
       'cursor': 'pointer',
