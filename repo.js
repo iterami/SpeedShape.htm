@@ -10,7 +10,7 @@ function randomize_shapes(){
     entity_remove_all();
 
     if(core_storage_data['negative-count'] > 0){
-        let loop_counter = core_storage_data['negative-count'] - 1;
+        let loop_counter = Math.floor(core_storage_data['negative-count']) - 1;
         do{
             entity_create({
               'id': 'negative-' + loop_counter,
@@ -34,7 +34,7 @@ function randomize_shapes(){
         }while(loop_counter--);
     }
     if(core_storage_data['positive-count'] > 0){
-        let loop_counter = core_storage_data['positive-count'] - 1;
+        let loop_counter = Math.floor(core_storage_data['positive-count']) - 1;
         do{
             entity_create({
               'id': 'positive-' + loop_counter,
@@ -176,10 +176,10 @@ function repo_init(){
         'positive-size-max': 99,
         'time-limit': 30,
       },
-      'storage-menu': '<table><tr><td><input class=mini id=negative-count min=0 step=any type=number><td># of Negative'
+      'storage-menu': '<table><tr><td><input class=mini id=negative-count min=0 step=1 type=number><td># of Negative'
         + '<tr><td><input class=mini id=negative-size-bonus step=any type=number><td>Negative Size Bonus'
         + '<tr><td><input class=mini id=negative-size-max step=any type=number><td>Negative Size Max'
-        + '<tr><td><input class=mini id=positive-count min=0 step=any type=number><td># of Positive'
+        + '<tr><td><input class=mini id=positive-count min=0 step=1 type=number><td># of Positive'
         + '<tr><td><input class=mini id=positive-size-bonus step=any type=number><td>Positive Size Bonus'
         + '<tr><td><input class=mini id=positive-size-max step=any type=number><td>Positive Size Max'
         + '<tr><td><input class=mini id=time-limit step=any type=number><td>Time Limit</table>',
