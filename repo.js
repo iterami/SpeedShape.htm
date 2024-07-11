@@ -19,7 +19,6 @@ function randomize_shapes(){
                 'height': core_random_integer({
                   'max': core_storage_data['negative-size-max'],
                 }) + core_storage_data['negative-size-bonus'],
-                'score': -1,
                 'width': core_random_integer({
                   'max': core_storage_data['negative-size-max'],
                 }) + core_storage_data['negative-size-bonus'],
@@ -43,7 +42,6 @@ function randomize_shapes(){
                 'height': core_random_integer({
                   'max': core_storage_data['positive-size-max'],
                 }) + core_storage_data['positive-size-bonus'],
-                'score': 1,
                 'width': core_random_integer({
                   'max': core_storage_data['positive-size-max'],
                 }) + core_storage_data['positive-size-bonus'],
@@ -136,50 +134,40 @@ function repo_init(){
                   return;
               }
 
-              let dscore = 0;
-
-              entity_group_modify({
-                'groups': [
-                  'canvas',
-                ],
-                'todo': function(entity){
-                    if(core_mouse['x'] <= entity_entities[entity]['x']
-                      || core_mouse['x'] >= entity_entities[entity]['x'] + entity_entities[entity]['width']
-                      || core_mouse['y'] <= entity_entities[entity]['y']
-                      || core_mouse['y'] >= entity_entities[entity]['y'] + entity_entities[entity]['height']){
-                        return;
-                    }
-
-                    if(dscore <= 0){
-                        dscore = entity_entities[entity]['score'];
-                    }
-                },
-              });
-
-              if(dscore !== 0){
-                  score += dscore;
-
-                  audio_start('boop');
-
-                  randomize_shapes();
+              const pixel = canvas.getImageData(
+                core_mouse['x'], core_mouse['y'],
+                1, 1
+              ).data[0];
+              if(pixel === 0){
+                   return;
               }
+
+              score += pixel === 102
+                ? core_storage_data['negative-score']
+                : core_storage_data['positive-score'];
+              audio_start('boop');
+              randomize_shapes();
           },
         },
       },
       'reset': canvas_setmode,
       'storage': {
         'negative-count': 10,
+        'negative-score': -1,
         'negative-size-bonus': 42,
         'negative-size-max': 200,
         'positive-count': 1,
+        'positive-score': 1,
         'positive-size-bonus': 20,
         'positive-size-max': 99,
         'time-limit': 30,
       },
       'storage-menu': '<table><tr><td><input class=mini id=negative-count min=0 step=1 type=number><td># of Negative'
+        + '<tr><td><input class=mini id=negative-score step=any type=number><td>Negative Score'
         + '<tr><td><input class=mini id=negative-size-bonus step=any type=number><td>Negative Size Bonus'
         + '<tr><td><input class=mini id=negative-size-max step=any type=number><td>Negative Size Max'
         + '<tr><td><input class=mini id=positive-count min=0 step=1 type=number><td># of Positive'
+        + '<tr><td><input class=mini id=positive-score step=any type=number><td>Positive Score'
         + '<tr><td><input class=mini id=positive-size-bonus step=any type=number><td>Positive Size Bonus'
         + '<tr><td><input class=mini id=positive-size-max step=any type=number><td>Positive Size Max'
         + '<tr><td><input class=mini id=time-limit step=any type=number><td>Time Limit</table>',
