@@ -56,11 +56,8 @@ function randomize_shapes(){
         }while(loop_counter--);
     }
 
-    if(time <= 0){
-        canvas_draw();
-    }
+    canvas_draw();
 }
-
 
 function repo_drawlogic(){
     entity_group_modify({
@@ -77,29 +74,6 @@ function repo_drawlogic(){
             entity_entities[entity]['width'],
             entity_entities[entity]['height']
           );
-      },
-    });
-}
-
-function repo_logic(){
-    if(time <= 0){
-        core_interval_pause_all();
-        return;
-    }
-
-    time = time - .025;
-    time_display = core_number_format({
-      'decimals-min': 1,
-      'number': core_round({
-        'decimals': 1,
-        'number': time,
-      }),
-    });
-
-    core_ui_update({
-      'ids': {
-        'score': score,
-        'time': time_display + '/' + core_storage_data['time-limit'],
       },
     });
 }
@@ -122,7 +96,6 @@ function repo_init(){
       'globals': {
         'score': 0,
         'time': 0,
-        'time_display': .1,
       },
       'info': '<button id=start type=button>Start New Game</button>',
       'menu': true,
@@ -176,5 +149,33 @@ function repo_init(){
     });
     canvas_init({
       'cursor': 'pointer',
+      'interval': false,
+    });
+
+    core_interval_modify({
+      'id': 'interval',
+      'interval': 100,
+      'todo': function(){
+          if(time <= 0){
+              core_interval_pause_all();
+              return;
+          }
+
+          time = time - .1;
+          const time_display = core_number_format({
+            'decimals-min': 1,
+            'number': core_round({
+              'decimals': 1,
+              'number': time,
+            }),
+          });
+
+          core_ui_update({
+            'ids': {
+              'score': score,
+              'time': time_display + '/' + core_storage_data['time-limit'],
+            },
+          });
+      },
     });
 }
