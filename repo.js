@@ -102,7 +102,7 @@ function repo_init(){
       'mousebinds': {
         'mousedown': {
           'preventDefault': true,
-          'todo': function(event){
+          'todo': function(){
               if(time <= 0){
                   return;
               }
