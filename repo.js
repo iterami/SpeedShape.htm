@@ -161,15 +161,15 @@ function repo_init(){
               return;
           }
 
-          time = time - .1;
-          const time_display = core_number_format({
-            'decimals-min': 1,
-            'number': core_round({
-              'decimals': 1,
-              'number': time,
-            }),
+          time = core_round({
+            'decimals': 1,
+            'number': time - .1,
           });
 
+          const time_display = core_number_format({
+            'decimals-min': 1,
+            'number': time,
+          });
           core_ui_update({
             'ids': {
               'score': score,
