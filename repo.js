@@ -82,7 +82,7 @@ function repo_escape(){
     if(!entity_entities['negative-0']
       && !entity_entities['positive-0']
       && !core_menu_open){
-        canvas_setmode();
+        start();
     }
 }
 
@@ -90,7 +90,7 @@ function repo_init(){
     core_repo_init({
       'events': {
         'start': {
-          'onclick': canvas_setmode,
+          'onclick': start,
         },
       },
       'globals': {
@@ -177,4 +177,12 @@ function repo_init(){
           });
       },
     });
+}
+
+function start(){
+    if(score !== 0
+      && !globalThis.confirm('Start new game?')){
+        return;
+    }
+    canvas_setmode();
 }
