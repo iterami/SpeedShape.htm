@@ -82,7 +82,7 @@ function repo_escape(){
     if(!entity_entities['negative-0']
       && !entity_entities['positive-0']
       && !core_menu_open){
-        core_repo_reset();
+        canvas_setmode();
     }
 }
 
@@ -90,7 +90,7 @@ function repo_init(){
     core_repo_init({
       'events': {
         'start': {
-          'onclick': core_repo_reset,
+          'onclick': canvas_setmode,
         },
       },
       'globals': {
@@ -123,7 +123,6 @@ function repo_init(){
           },
         },
       },
-      'reset': canvas_setmode,
       'storage': {
         'negative-count': 10,
         'negative-score': -1,
