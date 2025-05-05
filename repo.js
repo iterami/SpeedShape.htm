@@ -103,7 +103,9 @@ function repo_init(){
         'mousedown': {
           'preventDefault': true,
           'todo': function(){
-              if(time <= 0){
+              if(!core_mouse['down-0']
+                || core_mouse['down-2']
+                || time <= 0){
                   return;
               }
 
@@ -112,7 +114,7 @@ function repo_init(){
                 1, 1
               ).data[0];
               if(pixel === 0){
-                   return;
+                  return;
               }
 
               score += pixel === 102
