@@ -94,6 +94,7 @@ function repo_init(){
         },
       },
       'globals': {
+        'picking': false,
         'score': 0,
         'time': 0,
       },
@@ -103,11 +104,11 @@ function repo_init(){
         'mousedown': {
           'preventDefault': true,
           'todo': function(){
-              if(!core_mouse['down-0']
-                || core_mouse['down-2']
+              if(picking
                 || time <= 0){
                   return;
               }
+              picking = true;
 
               const pixel = canvas.getImageData(
                 core_mouse['x'], core_mouse['y'],
@@ -122,6 +123,11 @@ function repo_init(){
                 : core_storage_data['positive-score'];
               audio_start('boop');
               randomize_shapes();
+          },
+        },
+        'mouseup': {
+          'todo': function(){
+              picking = false;
           },
         },
       },
