@@ -146,7 +146,7 @@ function repo_init(){
         + '<tr><td><input class=mini id=positive-size-max step=any type=number><td>Positive Size Max'
         + '<tr><td><input class=mini id=time-limit step=any type=number><td>Time Limit</table>',
       'title': 'SpeedShape.htm',
-      'ui': 'Score: <span id=score></span><br>Time: <span id=time></span>',
+      'ui': 'Score: <span id=score></span> | Time: <span id=time></span>',
     });
     canvas_init({
       'cursor': 'pointer',
