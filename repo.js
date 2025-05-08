@@ -100,8 +100,8 @@ function repo_init(){
       },
       'info': '<button id=start type=button>Start New Game</button>',
       'menu': true,
-      'mousebinds': {
-        'mousedown': {
+      'pointerbinds': {
+        'pointerdown': {
           'preventDefault': true,
           'todo': function(){
               if(picking
@@ -111,7 +111,7 @@ function repo_init(){
               picking = true;
 
               const pixel = canvas.getImageData(
-                core_mouse['x'], core_mouse['y'],
+                core_pointer['x'], core_pointer['y'],
                 1, 1
               ).data[0];
               if(pixel === 0){
@@ -125,7 +125,7 @@ function repo_init(){
               randomize_shapes();
           },
         },
-        'mouseup': {
+        'pointerup': {
           'todo': function(){
               picking = false;
           },
