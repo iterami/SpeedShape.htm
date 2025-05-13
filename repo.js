@@ -7,8 +7,8 @@ function create_shape(type, loop_counter){
       'id': type + '-' + loop_counter,
       'properties': {
         'color': type === 'positive'
-          ? '#663366'
-          : '#206620',
+          ? '#206620'
+          : '#663366',
         'height': core_random_integer({'max': max,}) + bonus,
         'width': core_random_integer({'max': max,}) + bonus,
         'x': core_random_integer({'max': canvas_properties['width'] - 60,}) - bonus / 2 + 30,
