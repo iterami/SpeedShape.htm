@@ -1,5 +1,22 @@
 'use strict';
 
+function create_shape(type, loop_counter){
+    const max = core_storage_data[type + '-size-max'];
+    const bonus = core_storage_data[type + '-size-bonus'];
+    entity_create({
+      'id': type + '-' + loop_counter,
+      'properties': {
+        'color': type === 'positive'
+          ? '#663366'
+          : '#206620',
+        'height': core_random_integer({'max': max,}) + bonus,
+        'width': core_random_integer({'max': max,}) + bonus,
+        'x': core_random_integer({'max': canvas_properties['width'] - 60,}) - bonus / 2 + 30,
+        'y': core_random_integer({'max': canvas_properties['height'] - 60,}) - bonus / 2 + 30,
+      },
+    });
+}
+
 function load_data(id){
     randomize_shapes();
     score = 0;
@@ -9,51 +26,11 @@ function load_data(id){
 function randomize_shapes(){
     entity_remove_all();
 
-    if(core_storage_data['negative-count'] > 0){
-        let loop_counter = Math.floor(core_storage_data['negative-count']) - 1;
-        do{
-            entity_create({
-              'id': 'negative-' + loop_counter,
-              'properties': {
-                'color': '#663366',
-                'height': core_random_integer({
-                  'max': core_storage_data['negative-size-max'],
-                }) + core_storage_data['negative-size-bonus'],
-                'width': core_random_integer({
-                  'max': core_storage_data['negative-size-max'],
-                }) + core_storage_data['negative-size-bonus'],
-                'x': core_random_integer({
-                  'max': canvas_properties['width'],
-                }) - core_storage_data['negative-size-bonus'] / 2,
-                'y': core_random_integer({
-                  'max': canvas_properties['height'],
-                }) - core_storage_data['negative-size-bonus'] / 2,
-              },
-            });
-        }while(loop_counter--);
+    for(let i = 0; i < core_storage_data['negative-count']; i++){
+        create_shape('negative', i);
     }
-    if(core_storage_data['positive-count'] > 0){
-        let loop_counter = Math.floor(core_storage_data['positive-count']) - 1;
-        do{
-            entity_create({
-              'id': 'positive-' + loop_counter,
-              'properties': {
-                'color': '#206620',
-                'height': core_random_integer({
-                  'max': core_storage_data['positive-size-max'],
-                }) + core_storage_data['positive-size-bonus'],
-                'width': core_random_integer({
-                  'max': core_storage_data['positive-size-max'],
-                }) + core_storage_data['positive-size-bonus'],
-                'x': core_random_integer({
-                  'max': canvas_properties['width'],
-                }) - core_storage_data['positive-size-bonus'] / 2,
-                'y': core_random_integer({
-                  'max': canvas_properties['height'],
-                }) - core_storage_data['positive-size-bonus'] / 2,
-              },
-            });
-        }while(loop_counter--);
+    for(let i = 0; i < core_storage_data['positive-count']; i++){
+        create_shape('positive', i);
     }
 
     canvas_draw();
