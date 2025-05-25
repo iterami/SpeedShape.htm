@@ -11,8 +11,8 @@ function create_shape(type, loop_counter){
           : '#663366',
         'height': core_random_integer({'max': max,}) + bonus,
         'width': core_random_integer({'max': max,}) + bonus,
-        'x': core_random_integer({'max': canvas_properties['width'] - 60,}) - bonus / 2 + 30,
-        'y': core_random_integer({'max': canvas_properties['height'] - 60,}) - bonus / 2 + 30,
+        'x': core_random_integer({'max': canvas_properties['width'],}) - bonus / 2,
+        'y': core_random_integer({'max': canvas_properties['height'] - 30,}) - bonus / 2 + 30,
       },
     });
 }
