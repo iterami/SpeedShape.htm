@@ -9,10 +9,10 @@ function create_shape(type, loop_counter){
         'color': type === 'positive'
           ? '#206620'
           : '#663366',
-        'height': core_random_integer({'max': max,}) + bonus,
-        'width': core_random_integer({'max': max,}) + bonus,
-        'x': core_random_integer({'max': canvas_properties['width'],}) - bonus / 2,
-        'y': core_random_integer({'max': canvas_properties['height'] - 30,}) - bonus / 2 + 30,
+        'height': core_random_integer(max) + bonus,
+        'width': core_random_integer(max,) + bonus,
+        'x': core_random_integer(canvas_properties['width']) - bonus / 2,
+        'y': core_random_integer(canvas_properties['height'] - 30) - bonus / 2 + 30,
       },
     });
 }
