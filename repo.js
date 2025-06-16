@@ -143,7 +143,7 @@ function repo_init(){
           });
 
           const time_display = core_number_format({
-            'decimals-min': 1,
+            'decimals_min': 1,
             'number': time,
           });
           core_ui_update({
