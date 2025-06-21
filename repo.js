@@ -111,7 +111,7 @@ function repo_init(){
         'positive_size_max': 99,
         'time_limit': 30,
       },
-      'storage-menu': '<table><tr><td><input class=mini id=negative_count min=0 step=1 type=number><td># of Negative'
+      'storage_menu': '<table><tr><td><input class=mini id=negative_count min=0 step=1 type=number><td># of Negative'
         + '<tr><td><input class=mini id=negative_score step=any type=number><td>Negative Score'
         + '<tr><td><input class=mini id=negative_size_bonus step=any type=number><td>Negative Size Bonus'
         + '<tr><td><input class=mini id=negative_size_max step=any type=number><td>Negative Size Max'
