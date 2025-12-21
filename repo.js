@@ -86,7 +86,6 @@ function repo_init(){
       'menu': true,
       'pointerbinds': {
         'pointerdown': {
-          'preventDefault': true,
           'todo': function(){
               if(time <= 0){
                   return;
