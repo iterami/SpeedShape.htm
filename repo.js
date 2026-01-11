@@ -6,9 +6,7 @@ function create_shape(type, loop_counter){
     entity_create({
       'id': type + '_' + loop_counter,
       'properties': {
-        'color': type === 'positive'
-          ? '#206620'
-          : '#663366',
+        'color': core_storage_data[type + '_color'],
         'height': core_random_integer(max) + bonus,
         'width': core_random_integer(max) + bonus,
         'x': core_random_integer(canvas_properties.width) - bonus / 2,
@@ -102,10 +100,12 @@ function repo_init(){
         },
       },
       'storage': {
+        'negative_color': '#663366',
         'negative_count': 10,
         'negative_score': -1,
         'negative_size_bonus': 42,
         'negative_size_max': 200,
+        'positive_color': '#206620',
         'positive_count': 1,
         'positive_score': 1,
         'positive_size_bonus': 20,
@@ -113,10 +113,12 @@ function repo_init(){
         'time_limit': 30,
       },
       'storage_menu': '<table><tr><td><input class=mini id=negative_count min=0 step=1 type=number><td># of Negative'
+        + '<tr><td><input id=negative_color type=color><td>Negative Color'
         + '<tr><td><input class=mini id=negative_score step=any type=number><td>Negative Score'
         + '<tr><td><input class=mini id=negative_size_bonus step=any type=number><td>Negative Size Bonus'
         + '<tr><td><input class=mini id=negative_size_max step=any type=number><td>Negative Size Max'
         + '<tr><td><input class=mini id=positive_count min=0 step=1 type=number><td># of Positive'
+        + '<tr><td><input id=positive_color type=color><td>Positive Color'
         + '<tr><td><input class=mini id=positive_score step=any type=number><td>Positive Score'
         + '<tr><td><input class=mini id=positive_size_bonus step=any type=number><td>Positive Size Bonus'
         + '<tr><td><input class=mini id=positive_size_max step=any type=number><td>Positive Size Max'
