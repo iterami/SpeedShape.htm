@@ -17,12 +17,6 @@ function create_shape(type, loop_counter){
     });
 }
 
-function load_data(id){
-    randomize_shapes();
-    score = 0;
-    time = core_storage_data.time_limit;
-}
-
 function randomize_shapes(){
     entity_remove_all();
 
@@ -161,6 +155,12 @@ function repo_init(){
           });
       },
     });
+}
+
+function repo_load(id){
+    randomize_shapes();
+    score = 0;
+    time = core_storage_data.time_limit;
 }
 
 function start(){
