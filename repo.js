@@ -15,6 +15,18 @@ function create_shape(type, loop_counter){
     });
 }
 
+function draw_shape(entity){
+    canvas_setproperties({
+      'fillStyle': entity.color,
+    });
+    canvas.fillRect(
+      entity.x,
+      entity.y,
+      entity.width,
+      entity.height
+    );
+}
+
 function randomize_shapes(){
     entity_remove_all();
 
@@ -33,17 +45,7 @@ function repo_drawlogic(){
       'groups': [
         'canvas',
       ],
-      'todo': function(entity){
-          canvas_setproperties({
-            'fillStyle': entity.color,
-          });
-          canvas.fillRect(
-            entity.x,
-            entity.y,
-            entity.width,
-            entity.height
-          );
-      },
+      'todo': draw_shape,
     });
 }
 
