@@ -15,6 +15,28 @@ function create_shape(type, loop_counter){
     });
 }
 
+function decisecond(){
+    if(time > 0){
+        time = core_round({
+          'decimals': 1,
+          'number': time - .1,
+        });
+
+        core_ui_update({
+          'ids': {
+            'time': core_number_format({
+              'decimals_min': 1,
+              'number': time,
+            }),
+          },
+        });
+    }
+
+    if(time <= 0){
+        core_interval_lock('interval');
+    }
+}
+
 function draw_shape(entity){
     canvas_setproperties({
       'fillStyle': entity.color,
@@ -96,6 +118,11 @@ function repo_init(){
               score += pixel === 102
                 ? core_storage_data.negative_score
                 : core_storage_data.positive_score;
+              core_ui_update({
+                'ids': {
+                  'score': score,
+                },
+              });
               audio_start('boop');
               randomize_shapes();
           },
@@ -132,39 +159,25 @@ function repo_init(){
       'cursor': 'pointer',
       'interval': false,
     });
-
-    core_interval_modify({
-      'id': 'interval',
-      'interval': 100,
-      'todo': function(){
-          if(time <= 0){
-              core_interval_pause_all();
-              return;
-          }
-
-          time = core_round({
-            'decimals': 1,
-            'number': time - .1,
-          });
-
-          const time_display = core_number_format({
-            'decimals_min': 1,
-            'number': time,
-          });
-          core_ui_update({
-            'ids': {
-              'score': score,
-              'time': time_display + '/' + core_storage_data.time_limit,
-            },
-          });
-      },
-    });
 }
 
 function repo_load(id){
-    randomize_shapes();
     score = 0;
     time = core_storage_data.time_limit;
+
+    core_ui_update({
+      'ids': {
+        'score': score,
+        'time': time,
+      },
+    });
+
+    randomize_shapes();
+    core_interval_modify({
+      'id': 'interval',
+      'interval': 100,
+      'todo': decisecond,
+    });
 }
 
 function start(){
@@ -172,5 +185,6 @@ function start(){
       && !globalThis.confirm('Start new game?')){
         return;
     }
+
     canvas_setmode();
 }
