@@ -1,10 +1,10 @@
 'use strict';
 
-function create_shape(type, loop_counter){
+function create_shape(type, id){
     const max = core_storage_data[type + '_size_max'];
     const bonus = core_storage_data[type + '_size_bonus'];
     entity_create({
-      'id': type + '_' + loop_counter,
+      'id': type + '_' + id,
       'properties': {
         'color': core_storage_data[type + '_color'],
         'height': core_random_integer(max) + bonus,
