@@ -141,17 +141,17 @@ function repo_init(){
         'positive_size_max': 99,
         'time_limit': 30,
       },
-      'storage_menu': '<table><tr><td><input class=mini id=negative_count min=0 step=1 type=number><td># of Negative'
-        + '<tr><td><input id=negative_color type=color><td>Negative Color'
-        + '<tr><td><input class=mini id=negative_score step=any type=number><td>Negative Score'
-        + '<tr><td><input class=mini id=negative_size_bonus step=any type=number><td>Negative Size Bonus'
-        + '<tr><td><input class=mini id=negative_size_max step=any type=number><td>Negative Size Max'
-        + '<tr><td><input class=mini id=positive_count min=0 step=1 type=number><td># of Positive'
+      'storage_menu': '<table><tr><td><input class=mini id=time_limit step=any type=number><td>Time Limit'
         + '<tr><td><input id=positive_color type=color><td>Positive Color'
+        + '<tr><td><input class=mini id=positive_count min=0 step=1 type=number><td># of Positive'
         + '<tr><td><input class=mini id=positive_score step=any type=number><td>Positive Score'
-        + '<tr><td><input class=mini id=positive_size_bonus step=any type=number><td>Positive Size Bonus'
-        + '<tr><td><input class=mini id=positive_size_max step=any type=number><td>Positive Size Max'
-        + '<tr><td><input class=mini id=time_limit step=any type=number><td>Time Limit</table>',
+        + '<tr><td><input class=mini id=positive_size_max min=0 step=any type=number><td>Positive Size Max'
+        + '<tr><td><input class=mini id=positive_size_bonus min=0 step=any type=number><td>Positive Size Bonus'
+        + '<tr><td><input id=negative_color type=color><td>Negative Color'
+        + '<tr><td><input class=mini id=negative_count min=0 step=1 type=number><td># of Negative'
+        + '<tr><td><input class=mini id=negative_score step=any type=number><td>Negative Score'
+        + '<tr><td><input class=mini id=negative_size_max min=0 step=any type=number><td>Negative Size Max'
+        + '<tr><td><input class=mini id=negative_size_bonus min=0 step=any type=number><td>Negative Size Bonus</table>',
       'title': 'SpeedShape.htm',
       'ui': 'Score: <span id=score></span> | Time: <span id=time></span>',
     });
