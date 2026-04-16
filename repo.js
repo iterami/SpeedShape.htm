@@ -72,6 +72,8 @@ function repo_drawlogic(){
 }
 
 function repo_escape(){
+    audio_state_all(!core_menu_open);
+
     if(!entity_entities.negative_0
       && !entity_entities.positive_0
       && !core_menu_open){
