@@ -155,7 +155,7 @@ function repo_init(){
         + '<tr><td><input class=mini id=negative_size_max min=0 step=any type=number><td>Negative Size Max'
         + '<tr><td><input class=mini id=negative_size_bonus min=0 step=any type=number><td>Negative Size Bonus</table>',
       'title': 'SpeedShape.htm',
-      'ui': 'Score: <span id=score></span> | Time: <span id=time></span>',
+      'ui': ' <span id=score></span> | <span id=time></span>',
     });
     canvas_init({
       'cursor': 'pointer',
