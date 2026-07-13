@@ -64,9 +64,7 @@ function randomize_shapes(){
 
 function repo_drawlogic(){
     entity_group_modify({
-      'groups': [
-        'canvas',
-      ],
+      'groups': ['canvas'],
       'todo': draw_shape,
     });
 }
@@ -83,13 +81,11 @@ function repo_escape(){
 
 function repo_init(){
     core_repo_init({
-      'beforeunload': {
-        'todo': function(event){
-            if(score !== 0){
-                core_escape(true);
-                event.preventDefault();
-            }
-        },
+      'beforeunload': function(event){
+          if(score !== 0){
+              core_escape(true);
+              event.preventDefault();
+          }
       },
       'events': {
         'start': {
@@ -103,31 +99,29 @@ function repo_init(){
       'info': '<button class=medium id=start type=button>Start New Game</button>',
       'menu': true,
       'pointerbinds': {
-        'pointerdown': {
-          'todo': function(){
-              if(time <= 0){
-                  return;
-              }
+        'pointerdown': function(){
+            if(time <= 0){
+                return;
+            }
 
-              const pixel = canvas.getImageData(
-                core_pointer.x, core_pointer.y,
-                1, 1
-              ).data[0];
-              if(pixel === 0){
-                  return;
-              }
+            const pixel = canvas.getImageData(
+              core_pointer.x, core_pointer.y,
+              1, 1
+            ).data[0];
+            if(pixel === 0){
+                return;
+            }
 
-              score += pixel === 102
-                ? core_storage_data.negative_score
-                : core_storage_data.positive_score;
-              core_ui_update({
-                'ids': {
-                  'score': score,
-                },
-              });
-              audio_start('boop');
-              randomize_shapes();
-          },
+            score += pixel === 102
+              ? core_storage_data.negative_score
+              : core_storage_data.positive_score;
+            core_ui_update({
+              'ids': {
+                'score': score,
+              },
+            });
+            audio_start('boop');
+            randomize_shapes();
         },
       },
       'storage': {
